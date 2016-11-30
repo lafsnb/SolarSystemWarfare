@@ -55,6 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="Earth.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Patterns.cs" />
     <Compile Include="Projectiles.cs" />
     <Compile Include="Sprite.cs" />
     <Page Include="MainWindow.xaml">
@@ -93,6 +94,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="EarthBattleShip.png" />
+    <Resource Include="enemy1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

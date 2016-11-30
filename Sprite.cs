@@ -9,15 +9,15 @@ namespace SolarSystemWarfare
 {
     class Sprite
     {
-        private int X { get; set; }
-        private int Y { get; set; }
+        public double X { get; private set; }
+        public double Y { get; private set; }
         private int Speed { get; }
         private int Durability { get; }
         private Rectangle Rect { get; }
         //private Icon Icon { get; } //TODO
-        private Image Icon { get; }
+        public Image Icon { get; private set; }
 
-        public Sprite(int x, int y, int speed, int durability, 
+        public Sprite(double x, double y, int speed, int durability, 
             Rectangle rect, Image icon)
         {
             X = x;
@@ -28,21 +28,22 @@ namespace SolarSystemWarfare
             Icon = icon;
         }
 
-        public void MoveX(int x)
+        public void MoveX(double x)
         {
             X += x;
         }
 
-        public void MoveY(int y)
+        public void MoveY(double y)
         {
             Y += y;
         }
 
         
 
-        public bool Destroyed()
+        public void Destroyed()
         {
-            return false; //TODO
+            //return false; //TODO
+
         }
     }
 }
