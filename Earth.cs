@@ -9,7 +9,7 @@ namespace SolarSystemWarfare
 {
     class Earth : Sprite
     {
-        public Earth(int x, int y, int speed, int durability, Rectangle rect,
+        public Earth(double x, double y, int speed, int durability, Rectangle rect,
             Image icon) 
             : base(x, y, speed, durability, rect, icon)
         {
