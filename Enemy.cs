@@ -14,7 +14,7 @@ namespace SolarSystemWarfare
         private int NumOfProjectiles { get; }
         private double RateOfFire { get; }
 
-        public Enemy(int x, int y, int speed, int durability, Rectangle rect, 
+        public Enemy(double x, double y, int speed, int durability, Rectangle rect, 
             Image icon, int numOfProjectiles, double rateOfFire) 
             : base(x, y, speed, durability, rect, icon)
         {
