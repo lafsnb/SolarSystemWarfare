@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+//using System.Drawing;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 
@@ -15,15 +16,21 @@ namespace SolarSystemWarfare
         public double Speed { get; private set; }
         protected int Durability { get; }
         public Rectangle Rect { get; protected set; }
+        private System.Drawing.Rectangle Rect2 { get; }
+        private double Width { get; }
+        private double Height { get; }
         //private Icon Icon { get; } //TODO
 
-        public Sprite(double x, double y, double speed, int durability, Rectangle rect)
+        public Sprite(double x, double y, double width, double height, double speed, int durability, Rectangle rect)
         {
             X = x;
             Y = y;
+            Width = width;
+            Height = height;
             Speed = speed;
             Durability = durability;
             Dead = false;
+            Rect2 = new System.Drawing.Rectangle((int) x, (int) y, (int) width, (int) height);
         }
 
         public void MoveX(double x)
