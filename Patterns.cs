@@ -2,47 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Shapes;
-using System.Windows.Controls;
 
 namespace SolarSystemWarfare
 {
-    class Patterns
+    abstract class Patterns
     {
 
-        private bool goLeft = false;
-        private bool goRight = true;
+        protected bool pathOne = true;
+        protected bool pathTwo = false;
+        protected int howFarDown;
 
-        private Sprite Sprite { get; set; }
+        protected Sprite Sprite { get; set; }
 
-        public Patterns(Sprite sprite)
+        public Patterns(Sprite sprite, int howFarDown)
         {
             Sprite = sprite;
+            this.howFarDown = howFarDown;
         }
 
-        public void SwishSway()
-        {
-            if (goRight)
-            {
-                Sprite.MoveY(.5);
-                Sprite.MoveX(2);
-            }
-            else if (goLeft)
-            {
-                Sprite.MoveY(.5);
-                Sprite.MoveX(-2);
-            }
-            if (Sprite.X == 400)
-            {
-                goRight = false;
-                goLeft = true;
-            }
-            else if (Sprite.X == 20)
-            {
-                goRight = true;
-                goLeft = false;
-            }
-        }
+        abstract public void runPattern();
 
     }
 }
