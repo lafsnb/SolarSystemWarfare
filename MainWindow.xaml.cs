@@ -57,13 +57,22 @@ namespace SolarSystemWarfare
 
         private void MoveShips()
         {
-            IList<int> removeCount = new List<int>();
+            //IList<int> removeCount = new List<int>();
             for (int counter = 0; counter != shipPool.Count; counter++)
             {
-                if (shipPool[counter].Dead)
+                //if (shipPool[counter].Dead)
+                //{
+                //    //removeCount.Add(counter);
+                //    Space.Children.Remove(shipPool[counter].Rect);
+                //    shipPool[counter] = null;
+                //}
+                if (shipPool[counter].X <= -1 || shipPool[counter].X >= 525  ||
+                        shipPool[counter].Y <= -20 || shipPool[counter].Y >= 650)
                 {
-                    removeCount.Add(counter);
-                    continue;
+                    //removeCount.Add(counter);
+                    //Space.Children.Remove(shipPool[counter].Rect);
+                    shipPool[counter].Destroy();
+                    Console.WriteLine("Ship removed");
                 }
                 else
                 {
@@ -72,10 +81,18 @@ namespace SolarSystemWarfare
                 }
             }
 
-            foreach (int r in removeCount)
+            RemoveShips.CollisionCheck(shipPool);
+
+            foreach (Sprite el in shipPool)
             {
-                shipPool.RemoveAt(r);
+                if (el.Dead)
+                {
+                    Space.Children.Remove(el.Rect);
+                }
             }
+
+            RemoveShips.remove(shipPool);
+
         }
 
         private void SpawnEnemies(Object source, ElapsedEventArgs e)
@@ -134,14 +151,18 @@ namespace SolarSystemWarfare
             //{
             //    pat.runPattern();
             //}
-
-            foreach(Sprite en in shipPool)
+            try
             {
-                if (en is Enemy)
+                foreach (Sprite en in shipPool)
                 {
-                    ((Enemy)en).Pattern.runPattern();
+                    if (en is Enemy)
+                    {
+                        ((Enemy)en).Pattern.runPattern();
+                    }
                 }
             }
+            catch (InvalidOperationException e) { }
+
         }
 
         private void MoveEnemyShip(Object source, ElapsedEventArgs e)
@@ -183,7 +204,7 @@ namespace SolarSystemWarfare
             Rectangle earthPic = new Rectangle();
             earthPic.Fill = (ImageBrush)Resources["EarthImage"];
             earthPic.Height = 40;
-            earthPic.Width = 45;
+            earthPic.Width = 50;
 
             return earthPic;
         }

@@ -31,12 +31,12 @@ namespace SolarSystemWarfare
             }
             if (pathOne && !(Sprite.Y >= howFarDown))
             {
-                Sprite.MoveY(Sprite.Speed / 2);
+                Sprite.MoveY(Sprite.Speed / 4);
                 Sprite.MoveX(Sprite.Speed);
             }
             else if (pathTwo && !(Sprite.Y >= howFarDown))
             {
-                Sprite.MoveY(Sprite.Speed / 2);
+                Sprite.MoveY(Sprite.Speed / 4);
                 Sprite.MoveX(-Sprite.Speed);
             }
             if (Sprite.X == 400 && !(Sprite.Y >= howFarDown))
