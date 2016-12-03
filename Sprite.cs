@@ -9,23 +9,21 @@ namespace SolarSystemWarfare
 {
     class Sprite
     {
+        public bool Dead { get; private set; }
         public double X { get; private set; }
         public double Y { get; private set; }
-        private int Speed { get; }
-        private int Durability { get; }
-        private Rectangle Rect { get; }
+        public double Speed { get; private set; }
+        protected int Durability { get; }
+        public Rectangle Rect { get; protected set; }
         //private Icon Icon { get; } //TODO
-        public Image Icon { get; private set; }
 
-        public Sprite(double x, double y, int speed, int durability, 
-            Rectangle rect, Image icon)
+        public Sprite(double x, double y, double speed, int durability, Rectangle rect)
         {
             X = x;
             Y = y;
             Speed = speed;
             Durability = durability;
-            Rect = rect;
-            Icon = icon;
+            Dead = false;
         }
 
         public void MoveX(double x)
@@ -43,6 +41,7 @@ namespace SolarSystemWarfare
         public void Destroyed()
         {
             //return false; //TODO
+            Dead = true;
 
         }
     }

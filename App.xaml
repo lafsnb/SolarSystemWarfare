@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SolarSystemWarfare"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
+        <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
     </Application.Resources>
 </Application>

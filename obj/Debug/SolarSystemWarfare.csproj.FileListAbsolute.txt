@@ -11,3 +11,17 @@ C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master\SolarSystemWarfar
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.exe
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.pdb
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.exe
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.pdb
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.exe
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.pdb
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csprojResolveAssemblyReference.cache
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\MainWindow.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\App.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\MainWindow.baml
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.g.resources
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\App.baml

@@ -17,9 +17,9 @@ namespace SolarSystemWarfare
         private int Damage { get; }
         private Enemy[] EnemiesHit { get; }
 
-        public Projectiles(int x, int y, int speed, int durability, Rectangle rect,
-            Image icon, Direction direction, int damage) 
-            : base(x, y, speed, durability, rect, icon)
+        public Projectiles(int x, int y, double speed, int durability, Rectangle rect,
+            Direction direction, int damage) 
+            : base(x, y, speed, durability, rect)
         {
             Direction = direction;
             Damage = damage;

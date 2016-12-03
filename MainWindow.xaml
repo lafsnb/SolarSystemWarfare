@@ -5,14 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SolarSystemWarfare"
         mc:Ignorable="d"
+        Background="Black"
         Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown">
-    <Canvas>
-        <Image Name="Enemy1" Source="enemy1.png" Canvas.Top="200" Canvas.Left="100"/>
+
+    <Window.Resources>
+        <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
+        <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
+    </Window.Resources>
+    <Canvas Name="Space">
+        <!--<Image Name="Enemy1" Source="enemy1.png" Canvas.Top="200" Canvas.Left="100"/>
         <Image Name="Enemy2" Source="enemy1.png" Canvas.Top="200" Canvas.Left="110"/>
         <Image Name="Enemy3" Source="enemy1.png" Canvas.Top="200" Canvas.Left="120"/>
         <Image Name="Enemy4" Source="enemy1.png" Canvas.Top="200" Canvas.Left="130"/>
-        <Image Name="Enemy5" Source="enemy1.png" Canvas.Top="200" Canvas.Left="140"/>
-        <Image Name="EarthPic" Source="EarthBattleShip.png" Canvas.Top="400" Canvas.Left="200"
+        <Image Name="Enemy5" Source="enemy1.png" Canvas.Top="200" Canvas.Left="140"/>-->
+        <Rectangle Name="EarthPic"  Canvas.Top="400" Canvas.Left="200"
                Height="40" Width="45"/>
     </Canvas>
 </Window>
