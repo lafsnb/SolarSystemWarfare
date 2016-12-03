@@ -21,54 +21,24 @@ namespace SolarSystemWarfare
     /// </summary>
     public partial class MainWindow : Window
     {
-        public delegate void MovingShips();
+        public delegate void runOnUIThread();
 
-        Enemy en;
-        Enemy en2;
-        Enemy en3;
-        Enemy en4;
-        Enemy en5;
+        private Earth earth;
 
-        Patterns enPat1;
-        Patterns enPat2;
-        Patterns enPat3;
-        Patterns enPat4;
-        Patterns enPat5;
+        private IList<Sprite> shipPool = new List<Sprite>();
+        //private IList<Patterns> shipPatterns = new List<Patterns>();
 
-        Earth earth;
-
-        bool goRight = true;
-        bool goLeft = false;
-
-        IList<Sprite> shipPool = new List<Sprite>();
+        private Random rand = new Random();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            en = new Enemy(20, 20, 1, 1, new Rectangle(), Enemy1, 1, 1);
-            en2 = new Enemy(60, 50, 1, 1, new Rectangle(), Enemy2, 1, 1);
-            en3 = new Enemy(100, 80, 1, 1, new Rectangle(), Enemy3, 1, 1);
-            en4 = new Enemy(140, 110, 1, 1, new Rectangle(), Enemy4, 1, 1);
-            en5 = new Enemy(180, 140, 1, 1, new Rectangle(), Enemy5, 1, 1);
+            earth = new Earth(200, 400, 3, 1, InitEarthPic());
 
-            enPat1 = new Patterns(en);
-            enPat2 = new Patterns(en2);
-            enPat3 = new Patterns(en3);
-            enPat4 = new Patterns(en4);
-            enPat5 = new Patterns(en5);
-
-            earth = new Earth(200, 400, 1, 1, new Rectangle(), EarthPic);            
-
-            shipPool.Add(en);
             shipPool.Add(earth);
-            shipPool.Add(en2);
-            shipPool.Add(en3);
-            shipPool.Add(en4);
-            shipPool.Add(en5);
 
-            Canvas.SetLeft(en.Icon, 20);
-            Canvas.SetTop(en.Icon, 20);
+            Space.Children.Add(earth.Rect);
 
             Timer timetoMove = new Timer(5);
             timetoMove.Elapsed += MoveEnemyShip;
@@ -76,6 +46,11 @@ namespace SolarSystemWarfare
             timetoMove.AutoReset = true;
             timetoMove.Enabled = true;
 
+            Timer spawnEnemy = new Timer(500);
+            spawnEnemy.Elapsed += SpawnEnemies;
+
+            spawnEnemy.AutoReset = true;
+            spawnEnemy.Enabled = true;
 
 
         }
@@ -85,14 +60,15 @@ namespace SolarSystemWarfare
             IList<int> removeCount = new List<int>();
             for (int counter = 0; counter != shipPool.Count; counter++)
             {
-                if (shipPool[counter] == null)
+                if (shipPool[counter].Dead)
                 {
                     removeCount.Add(counter);
+                    continue;
                 }
                 else
                 {
-                    Canvas.SetTop(shipPool[counter].Icon, shipPool[counter].Y);
-                    Canvas.SetLeft(shipPool[counter].Icon, shipPool[counter].X);
+                    Canvas.SetTop(shipPool[counter].Rect, shipPool[counter].Y);
+                    Canvas.SetLeft(shipPool[counter].Rect, shipPool[counter].X);
                 }
             }
 
@@ -102,70 +78,170 @@ namespace SolarSystemWarfare
             }
         }
 
-        private void MoveEnemyShip(Object source, ElapsedEventArgs e)
+        private void SpawnEnemies(Object source, ElapsedEventArgs e)
         {
-            enPat1.SwishSway();
-            enPat2.SwishSway();
-            enPat3.SwishSway();
-            enPat4.SwishSway();
-            enPat5.SwishSway();
-
-            this.Dispatcher.Invoke(DispatcherPriority.Send, new MovingShips(MoveShips));
-
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(NewEnemySpawn));
         }
 
 
-
-        private void MovePatternBackAndForth(Sprite sprite)
+        private void NewEnemySpawn()
         {
-            if (goRight)
+            int spawnChoice = rand.Next(1, 5);
+
+            Enemy en;
+
+            //Choice one is PatternSwish
+            if (spawnChoice == 1)
             {
-                sprite.MoveY(.5);
-                sprite.MoveX(2);
-            } else if (goLeft)
-            {
-                sprite.MoveY(.5);
-                en.MoveX(-2);
+                en = new Enemy(0, rand.Next(0, 301), 2, 1, 1, 1, initEnemyPic());
+
+                en.Pattern = new PatternSwishRight(en, rand.Next(100, 301));
+
             }
-            if (sprite.X == 400)
+            //Choice two is UpDownRight Pattern
+            else if (spawnChoice == 2)
             {
-                goRight = false;
-                goLeft = true;
-            } else if (sprite.X == 20)
-            {
-                goRight = true;
-                goLeft = false;
+                en = new Enemy(rand.Next(50, 401), 0, 2, 1, 1, 1, initEnemyPic());
+
+                en.Pattern = new PatternUpDownRight(en, rand.Next(20, 251));
+
             }
-            if (sprite.Y == 500)
+            //Choice three is UpDownLeft Pattern
+            else if (spawnChoice == 3)
             {
-                sprite = null;
+                en = new Enemy(rand.Next(50, 401), 0, 2, 1, 1, 1, initEnemyPic());
+
+                en.Pattern = new PatternUpDownLeft(en, rand.Next(20, 251));
+
             }
+            else
+            {
+                en = new Enemy(525, rand.Next(0, 301), 2, 1, 1, 1, initEnemyPic());
+
+                en.Pattern = new PatternSwishLeft(en, rand.Next(100, 301));
+            }
+
+            shipPool.Add(en);
+            Space.Children.Add(shipPool.Last().Rect);
+
+            //Two more choices to be implamented
+            //They will be mirrors of the other Patterns
+        }
+
+        private void PatternsMove()
+        {
+            //foreach(Patterns pat in shipPatterns)
+            //{
+            //    pat.runPattern();
+            //}
+
+            foreach (Sprite en in shipPool)
+            {
+                if (en is Enemy)
+                {
+                    ((Enemy)en).Pattern.runPattern();
+
+                }
+                /*Tori added in order to move laser projectile*/
+                else if (en is Projectiles)
+                {
+                    if (((Projectiles)en).Direction == Direction.UP)
+                    {
+                        en.MoveY(-en.Speed);
+                    }
+                    else if (((Projectiles)en).Direction == Direction.DOWN)
+                    {
+                        en.MoveY(en.Speed);
+                    }
+                }
+            }
+        }
+
+        private void MoveEnemyShip(Object source, ElapsedEventArgs e)
+        {
+            PatternsMove();
+
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(MoveShips));
+
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            switch(e.Key)
+            switch (e.Key)
             {
                 case Key.Up:
                 case Key.W:
-                    earth.MoveY(-1.5);
+                    earth.MoveY(-earth.Speed);
                     break;
 
                 case Key.Left:
                 case Key.A:
-                    earth.MoveX(-1.5);
+                    earth.MoveX(-earth.Speed);
                     break;
 
                 case Key.Right:
                 case Key.D:
-                    earth.MoveX(1.5);
+                    earth.MoveX(earth.Speed);
                     break;
 
                 case Key.Down:
                 case Key.S:
-                    earth.MoveY(1.5);
+                    earth.MoveY(earth.Speed);
                     break;
+
+                /*Tori added key to fire up*/
+                case Key.Z:
+                case Key.OemComma:
+                    Fire(earth, Direction.UP);
+                    break;
+
+
+                /*Tori added key to fire down*/
+                case Key.X:
+                case Key.OemPeriod:
+                    Fire(earth, Direction.DOWN);
+                    break;
+
             }
+        }
+
+        /*Tori added method to spawn projectiles next to ship*/
+        private void Fire(Sprite origin, Direction d)
+        {
+            Projectiles Left = new Projectiles(origin.X, origin.Y, 6, 1, initProjPic(), d, 1);
+            Space.Children.Add(Left.Rect);
+            shipPool.Add(Left);
+
+            Projectiles Right = new Projectiles(origin.X + 45, origin.Y, 6, 1, initProjPic(), d, 1);
+            Space.Children.Add(Right.Rect);
+            shipPool.Add(Right);
+        }
+
+        private Rectangle InitEarthPic()
+        {
+            Rectangle earthPic = new Rectangle();
+            earthPic.Fill = (ImageBrush)Resources["EarthImage"];
+            earthPic.Height = 40;
+            earthPic.Width = 45;
+
+            return earthPic;
+        }
+
+        private Rectangle initEnemyPic()
+        {
+            Rectangle enemyPic = new Rectangle();
+            enemyPic.Fill = (ImageBrush)Resources["EnemyImage"];
+
+            return enemyPic;
+        }
+
+        /*Tori added method to initilize projectile rectangle with projectile image*/
+        private Rectangle initProjPic()
+        {
+            Rectangle projPic = new Rectangle();
+            projPic.Fill = (ImageBrush)Resources["ProjImage"];
+
+            return projPic;
         }
     }
 }

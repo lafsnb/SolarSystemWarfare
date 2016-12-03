@@ -56,6 +56,10 @@
     <Compile Include="Earth.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Patterns.cs" />
+    <Compile Include="PatternSwishRight.cs" />
+    <Compile Include="PatternSwishLeft.cs" />
+    <Compile Include="PatternUpDownLeft.cs" />
+    <Compile Include="PatternUpDownRight.cs" />
     <Compile Include="Projectiles.cs" />
     <Compile Include="Sprite.cs" />
     <Page Include="MainWindow.xaml">
@@ -96,8 +100,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="EarthBattleShip.png" />
-    <Resource Include="enemy1.png" />
+    <Resource Include="Images\EarthBattleShip.png" />
+    <Resource Include="Images\EnemyShip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Projectile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
