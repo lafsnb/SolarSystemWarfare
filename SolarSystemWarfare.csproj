@@ -61,6 +61,7 @@
     <Compile Include="PatternUpDownLeft.cs" />
     <Compile Include="PatternUpDownRight.cs" />
     <Compile Include="Projectiles.cs" />
+    <Compile Include="RemoveShips.cs" />
     <Compile Include="Sprite.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -57,13 +57,21 @@ namespace SolarSystemWarfare
 
         private void MoveShips()
         {
-            IList<int> removeCount = new List<int>();
+            //IList<int> removeCount = new List<int>();
             for (int counter = 0; counter != shipPool.Count; counter++)
             {
                 if (shipPool[counter].Dead)
                 {
-                    removeCount.Add(counter);
-                    continue;
+                    //removeCount.Add(counter);
+                    Space.Children.Remove(shipPool[counter].Rect);
+                    shipPool[counter] = null;
+                }
+                else if (shipPool[counter].X <= -1 || shipPool[counter].X >= 525)
+                {
+                    //removeCount.Add(counter);
+                    Space.Children.Remove(shipPool[counter].Rect);
+                    shipPool[counter] = null;
+                    Console.WriteLine("Ship removed");
                 }
                 else
                 {
@@ -72,10 +80,8 @@ namespace SolarSystemWarfare
                 }
             }
 
-            foreach (int r in removeCount)
-            {
-                shipPool.RemoveAt(r);
-            }
+            RemoveShips.remove(shipPool);
+
         }
 
         private void SpawnEnemies(Object source, ElapsedEventArgs e)
@@ -134,14 +140,18 @@ namespace SolarSystemWarfare
             //{
             //    pat.runPattern();
             //}
-
-            foreach(Sprite en in shipPool)
+            try
             {
-                if (en is Enemy)
+                foreach (Sprite en in shipPool)
                 {
-                    ((Enemy)en).Pattern.runPattern();
+                    if (en is Enemy)
+                    {
+                        ((Enemy)en).Pattern.runPattern();
+                    }
                 }
             }
+            catch (InvalidOperationException e) { }
+
         }
 
         private void MoveEnemyShip(Object source, ElapsedEventArgs e)
