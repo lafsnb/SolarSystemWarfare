@@ -22,7 +22,6 @@ namespace SolarSystemWarfare
                     list[counter] = null;
                     list.RemoveAt(counter);
                     loop(list);
-                    Console.WriteLine("Ships were removed");
                     break;
                 } 
             }
@@ -114,7 +113,7 @@ namespace SolarSystemWarfare
                 sprite1.Y + height >= sprite2.Y &&
                 sprite1.Y + height <= sprite2.Y + sprite2.Rect.Height)
             {
-                Console.WriteLine("Collision detected");
+                Score.IncrementScore();
                 return true;
             }
 

@@ -39,3 +39,19 @@ C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\Sola
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.g.resources
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.exe
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.pdb
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.exe
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.pdb
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csprojResolveAssemblyReference.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\MainWindow.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\App.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\App.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\MainWindow.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.g.resources
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\Splash.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\Splash.baml
