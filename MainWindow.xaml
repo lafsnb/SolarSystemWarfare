@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:SolarSystemWarfare"
         mc:Ignorable="d"
         Background="Black"
-        Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown">
+        Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
 
     <Window.Resources>
         <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
         <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
+        <ImageBrush x:Key ="ProjImage" ImageSource="Images/Projectile.png"/>
     </Window.Resources>
     <Canvas Name="Space">
         <!--<Image Name="Enemy1" Source="enemy1.png" Canvas.Top="200" Canvas.Left="100"/>
