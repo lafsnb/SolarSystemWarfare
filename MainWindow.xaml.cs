@@ -37,6 +37,14 @@ namespace SolarSystemWarfare
 
         public MainWindow()
         {
+            Hide();
+
+            Splash splash = new Splash();
+            splash.Show();
+            System.Threading.Thread.Sleep(5000);
+            splash.Close();
+
+            Show();
             InitializeComponent();
 
             earth = new Earth(200, 400, 2, 3, InitEarthPic());
