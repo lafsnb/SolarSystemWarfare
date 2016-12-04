@@ -8,6 +8,7 @@ namespace SolarSystemWarfare
     static class RemoveShips
     {
 
+
         static public void remove(IList<Sprite> list) 
         {
             loop(list);
@@ -92,6 +93,7 @@ namespace SolarSystemWarfare
                 sprite1.Y + height <= sprite2.Y + sprite2.Rect.Height)
             {
                 Console.WriteLine("Collision detected");
+                Score.IncrementScore();
                 return true;
             }
 

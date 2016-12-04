@@ -24,7 +24,7 @@ namespace SolarSystemWarfare
         public delegate void runOnUIThread();
 
         private Earth earth;
-
+        
         private IList<Sprite> shipPool = new List<Sprite>();
         //private IList<Patterns> shipPatterns = new List<Patterns>();
 
@@ -93,6 +93,7 @@ namespace SolarSystemWarfare
 
             RemoveShips.remove(shipPool);
 
+            DisplayScore();
         }
 
         private void SpawnEnemies(Object source, ElapsedEventArgs e)
@@ -215,6 +216,11 @@ namespace SolarSystemWarfare
             enemyPic.Fill = (ImageBrush)Resources["EnemyImage"];
 
             return enemyPic;
+        }
+
+        private void DisplayScore()
+        {
+            ScoreLbl.Content = $"Score: {Score.GetScore()}";
         }
     }
 }

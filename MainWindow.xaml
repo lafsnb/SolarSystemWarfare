@@ -6,19 +6,31 @@
         xmlns:local="clr-namespace:SolarSystemWarfare"
         mc:Ignorable="d"
         Background="Black"
-        Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown">
+        WindowState="Maximized" 
+        WindowStyle="None"
+        Title="MainWindow"
+        KeyDown="Window_KeyDown">
 
     <Window.Resources>
         <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
         <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
     </Window.Resources>
-    <Canvas Name="Space">
-        <!--<Image Name="Enemy1" Source="enemy1.png" Canvas.Top="200" Canvas.Left="100"/>
-        <Image Name="Enemy2" Source="enemy1.png" Canvas.Top="200" Canvas.Left="110"/>
-        <Image Name="Enemy3" Source="enemy1.png" Canvas.Top="200" Canvas.Left="120"/>
-        <Image Name="Enemy4" Source="enemy1.png" Canvas.Top="200" Canvas.Left="130"/>
-        <Image Name="Enemy5" Source="enemy1.png" Canvas.Top="200" Canvas.Left="140"/>-->
-        <Rectangle Name="EarthPic"  Canvas.Top="400" Canvas.Left="200"
-               Height="40" Width="45"/>
-    </Canvas>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="400" Background="DarkGray"></StackPanel>
+        <StackPanel DockPanel.Dock="Right" Width="400" Background="DarkGray">
+            <Label Name="ScoreLbl" Foreground="Yellow" FontSize="20"
+                   HorizontalAlignment="Right" Content="Score: 0" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical" >
+            <Canvas Name="Space">
+                <!--<Image Name="Enemy1" Source="enemy1.png" Canvas.Top="200" Canvas.Left="100"/>
+                <Image Name="Enemy2" Source="enemy1.png" Canvas.Top="200" Canvas.Left="110"/>
+                <Image Name="Enemy3" Source="enemy1.png" Canvas.Top="200" Canvas.Left="120"/>
+                <Image Name="Enemy4" Source="enemy1.png" Canvas.Top="200" Canvas.Left="130"/>
+                <Image Name="Enemy5" Source="enemy1.png" Canvas.Top="200" Canvas.Left="140"/>-->
+                <Rectangle Name="EarthPic"  Canvas.Top="400" Canvas.Left="200"
+                       Height="40" Width="45"/>
+            </Canvas>
+        </StackPanel>
+    </DockPanel>
 </Window>
