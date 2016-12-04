@@ -13,7 +13,7 @@ namespace SolarSystemWarfare
         public double X { get; private set; }
         public double Y { get; private set; }
         public double Speed { get; private set; }
-        protected int Durability { get; }
+        protected int Durability { get; private set; }
         public Rectangle Rect { get; protected set; }
         //private Icon Icon { get; } //TODO
 
@@ -38,10 +38,15 @@ namespace SolarSystemWarfare
 
         
 
-        public void Destroyed()
+        public void Destroy()
         {
-            //return false; //TODO
-            Dead = true;
+
+            Durability--;
+
+            if (Durability == 0)
+            {
+                Dead = true;
+            }
 
         }
     }

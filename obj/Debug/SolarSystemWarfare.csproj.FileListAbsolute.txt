@@ -25,3 +25,17 @@ C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (1)\SolarSystemWarfare-master\obj\Debug\App.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.exe
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.pdb
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\bin\Debug\SolarSystemWarfare.exe
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\bin\Debug\SolarSystemWarfare.pdb
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.csprojResolveAssemblyReference.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\MainWindow.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\App.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\App.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\MainWindow.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.g.resources
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-DestroyingResources\SolarSystemWarfare-DestroyingResources\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache

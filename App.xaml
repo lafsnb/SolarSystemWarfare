@@ -6,5 +6,6 @@
     <Application.Resources>
         <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
         <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
+        <ImageBrush x:Key ="ProjImage" ImageSource="Images/Projectile.png"/>
     </Application.Resources>
 </Application>

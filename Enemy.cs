@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Timers;
 
 namespace SolarSystemWarfare
 {
@@ -26,6 +27,7 @@ namespace SolarSystemWarfare
             rect.Height = 20;
             rect.Width = 20;
             Rect = rect;
+
         }
     }
 }
