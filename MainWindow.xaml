@@ -6,20 +6,30 @@
         xmlns:local="clr-namespace:SolarSystemWarfare"
         mc:Ignorable="d"
         Background="Black"
-        Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+        Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Window.Resources>
         <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
         <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
         <ImageBrush x:Key ="ProjImage" ImageSource="Images/Projectile.png"/>
     </Window.Resources>
-    <Canvas Name="Space">
-        <!--<Image Name="Enemy1" Source="enemy1.png" Canvas.Top="200" Canvas.Left="100"/>
-        <Image Name="Enemy2" Source="enemy1.png" Canvas.Top="200" Canvas.Left="110"/>
-        <Image Name="Enemy3" Source="enemy1.png" Canvas.Top="200" Canvas.Left="120"/>
-        <Image Name="Enemy4" Source="enemy1.png" Canvas.Top="200" Canvas.Left="130"/>
-        <Image Name="Enemy5" Source="enemy1.png" Canvas.Top="200" Canvas.Left="140"/>-->
-        <Rectangle Name="EarthPic"  Canvas.Top="400" Canvas.Left="200"
-               Height="40" Width="45"/>
-    </Canvas>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="400" Background="DarkGray">
+            <Label Name="HighScores" HorizontalAlignment="Center" Padding="10px" Content="High Scores" FontSize="30" Foreground="Yellow"/>
+            <Label Name="Scores" HorizontalAlignment="Center" Padding="10px" Content="High Scores" FontSize="25" Foreground="Yellow"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right" Width="400" Background="DarkGray">
+            <Label Name="ScoreLbl" Foreground="Yellow" FontSize="20"
+                   HorizontalAlignment="Left" Content="Score: 0" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical" >
+            <Canvas Name="Space">
+                <Label Name="GameOverLabel" Content="Game Over" Foreground="White" FontSize="50" Visibility="Hidden"/>
+                <TextBox Name="EnterHighScore" Text="Enter Name" Width="100" Background="White" Foreground="Black" Visibility="Hidden"/>
+                <Button Name="CommitHighScore" Content="Enter Score" Background="White" Foreground="Black" Visibility="Hidden" Click="CommitHighScore_Click"/>
+                <Button Name="PlayAgain" Content="Play Again" Background="White" Foreground="Black" Visibility="Hidden" Click="PlayAgain_Click"/>
+            </Canvas>
+        </StackPanel>
+    </DockPanel>
 </Window>

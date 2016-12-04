@@ -23,13 +23,18 @@ namespace SolarSystemWarfare
     {
         public delegate void runOnUIThread();
 
+        public string highScores;
+
         private Earth earth;
         private bool lasersCooling = false;
-        private int spawnTimer = 1500;
-        private Timer spawnTimerRaise;
+        private int spawnTimer;
         private Timer spawnEnemy;
+        private Timer timetoMove;
+        private Timer laserTimer;
+        private Timer enemyFire;
 
         private IList<Sprite> shipPool = new List<Sprite>();
+        IDictionary<string, long> scores;
         IList<Sprite> firingList;
 
 
@@ -39,37 +44,16 @@ namespace SolarSystemWarfare
         {
             InitializeComponent();
 
-            earth = new Earth(200, 400, 2, 3, InitEarthPic());
+            Hide();
 
-            shipPool.Add(earth);
+            Splash splash = new Splash();
+            splash.Show();
+            System.Threading.Thread.Sleep(5000);
+            splash.Close();
 
-            Space.Children.Add(earth.Rect);
+            Show();
 
-            Timer timetoMove = new Timer(5);
-            timetoMove.Elapsed += MoveEnemyShip;
-
-            timetoMove.AutoReset = true;
-            timetoMove.Enabled = true;
-
-            Timer laserTimer = new Timer(500);
-            laserTimer.Elapsed += CoolLasersDown;
-
-            laserTimer.AutoReset = true;
-            laserTimer.Enabled = true;
-
-            Timer enemyFire = new Timer(2000);
-            enemyFire.Elapsed += EnemiesFire;
-
-            enemyFire.AutoReset = true;
-            enemyFire.Enabled = true;
-
-            spawnEnemy = new Timer(spawnTimer);
-            spawnEnemy.Elapsed += SpawnEnemies;
-
-            spawnEnemy.AutoReset = true;
-            spawnEnemy.Enabled = true;
-
-
+            StartGame();
         }
 
         private void MoveShips()
@@ -103,6 +87,12 @@ namespace SolarSystemWarfare
 
             RemoveShips.remove(shipPool);
 
+            DisplayScore();
+
+            if (earth.Dead)
+            {
+                GameOver();
+            }
         }
 
         private void SpawnTimerIncrease(Object source, ElapsedEventArgs e)
@@ -191,19 +181,19 @@ namespace SolarSystemWarfare
         private void PatternsMove()
         {
 
-            if (earth.Up)
+            if (earth.Up && earth.Y >= 10)
             {
                 earth.MoveY(-earth.Speed);
             }
-            if (earth.Down)
+            if (earth.Down && earth.Y <= 640)
             {
                 earth.MoveY(earth.Speed);
             }
-            if (earth.Left)
+            if (earth.Left && earth.X >= 10)
             {
                 earth.MoveX(-earth.Speed);
             }
-            if (earth.Right)
+            if (earth.Right && earth.X <= 515)
             {
                 earth.MoveX(earth.Speed);
             }
@@ -234,7 +224,7 @@ namespace SolarSystemWarfare
                     }
                 }
             }
-            catch (InvalidOperationException e) { }
+            catch (InvalidOperationException) { }
 
         }
 
@@ -364,6 +354,118 @@ namespace SolarSystemWarfare
             {
                 EnemyFire(el, Direction.DOWN);
             }
+        }
+
+        private void DisplayScore()
+        {
+            ScoreLbl.Content = $"Score: {Score.GetScore()}";
+        }
+
+        private void GameOver()
+        {
+            spawnEnemy.Stop();
+            timetoMove.Stop();
+            laserTimer.Stop();
+            enemyFire.Stop();
+
+            spawnEnemy.Enabled = false;
+            timetoMove.Enabled = false;
+            laserTimer.Enabled = false;
+            enemyFire.Enabled = false;
+
+            for (int counter = 0; counter != shipPool.Count; counter++)
+            {
+                Space.Children.Remove(shipPool[counter].Rect);
+            }
+
+            shipPool.Clear();
+
+            double left = (Space.ActualWidth - GameOverLabel.ActualWidth) / 2;
+            Canvas.SetLeft(GameOverLabel, left);
+            Canvas.SetTop(GameOverLabel, 300);
+
+            left = (Space.ActualWidth - EnterHighScore.ActualWidth) / 2;
+            Canvas.SetLeft(EnterHighScore, left - 60);
+            Canvas.SetTop(EnterHighScore, 400);
+
+            left = (Space.ActualWidth - CommitHighScore.ActualWidth) / 2;
+            Canvas.SetLeft(CommitHighScore, left + 60);
+            Canvas.SetTop(CommitHighScore, 400);
+
+            EnterHighScore.Visibility = Visibility.Visible;
+            CommitHighScore.Visibility = Visibility.Visible;
+            GameOverLabel.Visibility = Visibility.Visible;
+        }
+
+        private void StartGame()
+        {
+            earth = new Earth(200, 400, 2, 3, InitEarthPic());
+
+            shipPool.Add(earth);
+
+            Space.Children.Add(earth.Rect);
+
+            spawnTimer = 1500;
+            Score.ResetScore();
+            ScoreLbl.Content = "Score: 0";
+
+            scores = Score.ReadFromFile();
+            StringBuilder namesAndScores = new StringBuilder();
+            for(int counter = 0; counter != scores.Count; counter++)
+            {
+
+                namesAndScores.Append(string.Format("{0}: {1}\n", scores.Keys.ElementAt(counter), 
+                                                                scores.Values.ElementAt(counter)));
+
+            }
+
+            Scores.Content = namesAndScores.ToString();
+
+            timetoMove = new Timer(5);
+            timetoMove.Elapsed += MoveEnemyShip;
+
+            timetoMove.AutoReset = true;
+            timetoMove.Enabled = true;
+
+            laserTimer = new Timer(500);
+            laserTimer.Elapsed += CoolLasersDown;
+
+            laserTimer.AutoReset = true;
+            laserTimer.Enabled = true;
+
+            enemyFire = new Timer(2000);
+            enemyFire.Elapsed += EnemiesFire;
+
+            enemyFire.AutoReset = true;
+            enemyFire.Enabled = true;
+
+            spawnEnemy = new Timer(spawnTimer);
+            spawnEnemy.Elapsed += SpawnEnemies;
+
+            spawnEnemy.AutoReset = true;
+            spawnEnemy.Enabled = true;
+        }
+
+        private void CommitHighScore_Click(object sender, RoutedEventArgs e)
+        {
+            EnterHighScore.Visibility = Visibility.Hidden;
+            CommitHighScore.Visibility = Visibility.Hidden;
+
+            double left = (Space.ActualWidth - PlayAgain.ActualWidth) / 2;
+            Canvas.SetLeft(PlayAgain, left);
+            Canvas.SetTop(PlayAgain, 400);
+
+            Score.WriteToFile(EnterHighScore.Text);
+
+            PlayAgain.Visibility = Visibility.Visible;
+        }
+
+        private void PlayAgain_Click(object sender, RoutedEventArgs e)
+        {
+            GameOverLabel.Visibility = Visibility.Hidden;
+            PlayAgain.Visibility = Visibility.Hidden;
+
+            StartGame();
         }
     }
 
