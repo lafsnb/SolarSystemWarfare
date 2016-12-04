@@ -25,10 +25,13 @@ namespace SolarSystemWarfare
 
         private Earth earth;
         private bool lasersCooling = false;
+        private int spawnTimer = 1500;
+        private Timer spawnTimerRaise;
+        private Timer spawnEnemy;
 
         private IList<Sprite> shipPool = new List<Sprite>();
         IList<Sprite> firingList;
-        //private IList<Patterns> shipPatterns = new List<Patterns>();
+
 
         private Random rand = new Random();
 
@@ -60,7 +63,7 @@ namespace SolarSystemWarfare
             enemyFire.AutoReset = true;
             enemyFire.Enabled = true;
 
-            Timer spawnEnemy = new Timer(500);
+            spawnEnemy = new Timer(spawnTimer);
             spawnEnemy.Elapsed += SpawnEnemies;
 
             spawnEnemy.AutoReset = true;
@@ -71,20 +74,13 @@ namespace SolarSystemWarfare
 
         private void MoveShips()
         {
-            //IList<int> removeCount = new List<int>();
             for (int counter = 0; counter != shipPool.Count; counter++)
             {
-                //if (shipPool[counter].Dead)
-                //{
-                //    //removeCount.Add(counter);
-                //    Space.Children.Remove(shipPool[counter].Rect);
-                //    shipPool[counter] = null;
-                //}
-                if (shipPool[counter].X <= -1 || shipPool[counter].X >= 525  ||
+
+                if (shipPool[counter].X <= -1 || shipPool[counter].X >= 525 ||
                         shipPool[counter].Y <= -20 || shipPool[counter].Y >= 650)
                 {
-                    //removeCount.Add(counter);
-                    //Space.Children.Remove(shipPool[counter].Rect);
+
                     shipPool[counter].Destroy();
                     Console.WriteLine("Ship removed");
                 }
@@ -109,11 +105,20 @@ namespace SolarSystemWarfare
 
         }
 
+        private void SpawnTimerIncrease(Object source, ElapsedEventArgs e)
+        {
+            if (spawnTimer != 400)
+            {
+                spawnTimer -= 10;
+                spawnEnemy.Interval = spawnTimer;
+            }
+        }
+
         private void EnemiesFire(Object source, ElapsedEventArgs e)
         {
             firingList = new List<Sprite>();
 
-            foreach(Sprite el in shipPool)
+            foreach (Sprite el in shipPool)
             {
                 if (el is Enemy)
                 {
@@ -175,16 +180,16 @@ namespace SolarSystemWarfare
             shipPool.Add(en);
             Space.Children.Add(shipPool.Last().Rect);
 
-            //Two more choices to be implamented
-            //They will be mirrors of the other Patterns
+            if (spawnTimer != 400)
+            {
+                spawnEnemy.Interval = spawnTimer -= 20;
+            }
+
+
         }
 
         private void PatternsMove()
         {
-            //foreach(Patterns pat in shipPatterns)
-            //{
-            //    pat.runPattern();
-            //}
 
             if (earth.Up)
             {
@@ -243,29 +248,25 @@ namespace SolarSystemWarfare
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            switch(e.Key)
+            switch (e.Key)
             {
                 case Key.Up:
                 case Key.W:
-                    //earth.MoveY(-earth.Speed);
                     earth.Up = true;
                     break;
 
                 case Key.Left:
                 case Key.A:
-                    //earth.MoveX(-earth.Speed);
                     earth.Left = true;
                     break;
 
                 case Key.Right:
                 case Key.D:
-                    //earth.MoveX(earth.Speed);
                     earth.Right = true;
                     break;
 
                 case Key.Down:
                 case Key.S:
-                    //earth.MoveY(earth.Speed);
                     earth.Down = true;
                     break;
 
@@ -299,25 +300,21 @@ namespace SolarSystemWarfare
             {
                 case Key.Up:
                 case Key.W:
-                    //earth.MoveY(-earth.Speed);
                     earth.Up = false;
                     break;
 
                 case Key.Left:
                 case Key.A:
-                    //earth.MoveX(-earth.Speed);
                     earth.Left = false;
                     break;
 
                 case Key.Right:
                 case Key.D:
-                    //earth.MoveX(earth.Speed);
                     earth.Right = false;
                     break;
 
                 case Key.Down:
                 case Key.S:
-                    //earth.MoveY(earth.Speed);
                     earth.Down = false;
                     break;
 
@@ -355,7 +352,7 @@ namespace SolarSystemWarfare
 
             return projPic;
         }
-        
+
         private void CheatLaserFire()
         {
             Fire(earth, Direction.UP);
@@ -363,7 +360,7 @@ namespace SolarSystemWarfare
 
         private void CheatEnemyLaserFire()
         {
-            foreach(Sprite el in firingList)
+            foreach (Sprite el in firingList)
             {
                 EnemyFire(el, Direction.DOWN);
             }
