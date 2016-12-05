@@ -1,9 +1,1 @@
-Mr.Man,51
-Jacky,16
-Steven,14
-Jackson2,9
-PlayerTwo,5
-PlayerThree,4
-Player,3
-Jackson,185
-EfdsName,3
+Player1,4
