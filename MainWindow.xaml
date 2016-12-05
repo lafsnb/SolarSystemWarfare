@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SolarSystemWarfare"
         mc:Ignorable="d"
-        
+        Name="TopWindow"
         Title="Solar System Warfare" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
@@ -38,7 +38,7 @@
             <Canvas Name="Space">
                 <Label Name="GameTitle" Foreground="White" Content="Solar System Warfare" FontSize="40" Visibility="Hidden" />
                 <Label Name="GameOverLabel" Content="Game Over" Foreground="White" FontSize="50" Visibility="Hidden"/>
-                <TextBox Name="EnterHighScore" Text="Enter Name" Width="100" Background="White" Foreground="Black" Visibility="Hidden"/>
+                <TextBox Name="EnterHighScore" Text="Player1" MaxLength="25" Width="100" Background="White" Foreground="Black" Visibility="Hidden" ToolTip="Enter Name"/>
                 <Button Name="CommitHighScore" Content="Enter Score" Background="White" Foreground="Black" Visibility="Hidden" Click="CommitHighScore_Click"/>
                 <Button Name="StartGameBt" Content="Start Game" Background="White" Foreground="Black" Visibility="Hidden" Click="StartGameBt_Click"/>
             </Canvas>

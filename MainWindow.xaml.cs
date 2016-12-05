@@ -27,8 +27,8 @@ namespace SolarSystemWarfare
 
         private Earth earth;
         private bool lasersCooling = false;
-        double ScreenWidth = SystemParameters.VirtualScreenWidth;
-        double ScreenHeight = SystemParameters.VirtualScreenHeight;
+        double screenWidth = SystemParameters.VirtualScreenWidth;
+        double screenHeight = SystemParameters.VirtualScreenHeight;
         private int spawnTimer;
         private int upDownSpawnLocation = ((int)SystemParameters.VirtualScreenWidth / 3) - 100;
         private int swishSpawnLocation = ((int)SystemParameters.VirtualScreenWidth / 3) - 200;
@@ -50,12 +50,17 @@ namespace SolarSystemWarfare
         {
             InitializeComponent();
 
-            Panel1.Width = ScreenWidth / 3;
-            Panel1.Height = ScreenHeight;
-            Panel2.Width = ScreenWidth / 3;
-            Panel2.Height = ScreenHeight;
-            Space.Width = ScreenWidth / 3;
-            Space.Height = ScreenHeight;
+            Panel1.Width = screenWidth / 3;
+            Panel1.Height = screenHeight;
+            Panel2.Width = screenWidth / 3;
+            Panel2.Height = screenHeight;
+            Space.Width = screenWidth / 3;
+            Space.Height = screenHeight;
+
+            TopWindow.MinHeight = screenHeight;
+            TopWindow.MinWidth = screenWidth;
+            TopWindow.Height = screenHeight;
+            TopWindow.Width = screenWidth;
 
             Hide();
 
@@ -460,7 +465,13 @@ namespace SolarSystemWarfare
             Canvas.SetLeft(StartGameBt, left);
             Canvas.SetTop(StartGameBt, 400);
 
-            Score.WriteToFile(EnterHighScore.Text, scores);
+            if (string.IsNullOrWhiteSpace(EnterHighScore.Text))
+            {
+                Score.WriteToFile("Player1", scores);
+            } else
+            {
+                Score.WriteToFile(EnterHighScore.Text, scores);
+            }
 
             Score.ResetScore();
 
@@ -672,7 +683,7 @@ namespace SolarSystemWarfare
             {
 
                 namesAndScores.Append(string.Format("{0}. {1}: {2}\n", counter + 1, scores.Keys.ElementAt(counter),
-                                                                scores.Values.ElementAt(counter)));
+                                                                scores.Values.ElementAt(counter).ToString()));
 
             }
 
@@ -681,5 +692,4 @@ namespace SolarSystemWarfare
             ScoreLbl.Content = "Score: 0";
         }
     }
-
 }
