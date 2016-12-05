@@ -25,14 +25,49 @@ namespace SolarSystemWarfare
             return Points;
         }
 
-        public static void WriteToFile(string name)
+        public static void WriteToFile(string name, IDictionary<string, long> scores)
         {
-            string write = $"{name},{GetScore()}";
 
-            using (StreamWriter file =
-            new StreamWriter("HighScores.txt", true))
+            if (scores.ContainsKey(name))
             {
-                file.WriteLine(write);
+                bool writeToFile = false;
+
+                for (int counter = 0; counter != scores.Count; counter++)
+                {
+                    if (scores.ElementAt(counter).Key == name)
+                    {
+                        if (Score.GetScore() >= scores.ElementAt(counter).Value)
+                        {
+                            scores.Remove(name);
+                            scores.Add(name, GetScore());
+                            writeToFile = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (writeToFile)
+                {
+                    using (StreamWriter file =
+                    new StreamWriter("HighScores.txt", false))
+                    {
+                        for (int counter = 0; counter != scores.Count; counter++)
+                        {
+                            file.WriteLine($"{scores.ElementAt(counter).Key},{scores.ElementAt(counter).Value}");
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                string write = $"{name},{GetScore()}";
+
+                using (StreamWriter file =
+                new StreamWriter("HighScores.txt", true))
+                {
+                    file.WriteLine(write);
+                }
             }
         }
 

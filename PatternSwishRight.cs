@@ -39,7 +39,7 @@ namespace SolarSystemWarfare
                 Sprite.MoveY(Sprite.Speed / 4);
                 Sprite.MoveX(-Sprite.Speed);
             }
-            if (Sprite.X == 400 && !(Sprite.Y >= howFarDown))
+            if (Sprite.X == 500 && !(Sprite.Y >= howFarDown))
             {
                 pathOne = false;
                 pathTwo = true;
