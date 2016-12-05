@@ -5,30 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SolarSystemWarfare"
         mc:Ignorable="d"
-        Background="Black"
-        Title="MainWindow" Height="650" Width="525" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
+        
+        Title="Solar System Warfare" Height="650" Width="525" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Window.Resources>
         <ImageBrush x:Key ="EarthImage" ImageSource="Images/EarthBattleShip.png" />
         <ImageBrush x:Key ="EnemyImage" ImageSource="Images/EnemyShip.png" />
         <ImageBrush x:Key ="ProjImage" ImageSource="Images/Projectile.png"/>
+        <ImageBrush x:Key ="ProjEarthImage" ImageSource="Images/ProjectileEarth.png"/>
+        <ImageBrush x:Key= "FullHeart" ImageSource="Images/fullHeart.png"/>
+        <ImageBrush x:Key= "EmptyHeart" ImageSource="Images/emptyHeart.png"/>
     </Window.Resources>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left" Width="400" Background="DarkGray">
+        <StackPanel DockPanel.Dock="Left" Width="400" Background="Black" Panel.ZIndex="100">
             <Label Name="HighScores" HorizontalAlignment="Center" Padding="10px" Content="High Scores" FontSize="30" Foreground="Yellow"/>
             <Label Name="Scores" HorizontalAlignment="Center" Padding="10px" Content="High Scores" FontSize="25" Foreground="Yellow"/>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Right" Width="400" Background="DarkGray">
+        <StackPanel DockPanel.Dock="Right" Width="400" Background="Black" Panel.ZIndex="100">
             <Label Name="ScoreLbl" Foreground="Yellow" FontSize="20"
                    HorizontalAlignment="Left" Content="Score: 0" />
         </StackPanel>
-        <StackPanel Orientation="Vertical" >
+        <StackPanel Name="GameBoard" Orientation="Vertical" >
+            <StackPanel.Background>
+                <ImageBrush ImageSource="Images/spaceBackground.png" />
+            </StackPanel.Background>
+            <StackPanel Name="HeartLine" Orientation="Horizontal">
+                <Rectangle Name="Heart3" Height="15" Width="20" Visibility="Hidden" HorizontalAlignment="Left"/>
+                <Rectangle Name="Heart2" Height="15" Width="20" Visibility="Hidden" HorizontalAlignment="Left"/>
+                <Rectangle Name="Heart1" Height="15" Width="20" Visibility="Hidden" HorizontalAlignment="Left"/>
+            </StackPanel>
             <Canvas Name="Space">
+                <Label Name="GameTitle" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Content="Solar System Warfare" FontSize="40" Visibility="Visible" />
                 <Label Name="GameOverLabel" Content="Game Over" Foreground="White" FontSize="50" Visibility="Hidden"/>
                 <TextBox Name="EnterHighScore" Text="Enter Name" Width="100" Background="White" Foreground="Black" Visibility="Hidden"/>
                 <Button Name="CommitHighScore" Content="Enter Score" Background="White" Foreground="Black" Visibility="Hidden" Click="CommitHighScore_Click"/>
-                <Button Name="PlayAgain" Content="Play Again" Background="White" Foreground="Black" Visibility="Hidden" Click="PlayAgain_Click"/>
+                <Button Name="StartGameBt" Content="Start Game" Background="White" Foreground="Black" Visibility="Hidden" Click="StartGameBt_Click"/>
             </Canvas>
         </StackPanel>
     </DockPanel>

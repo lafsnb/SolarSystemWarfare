@@ -53,7 +53,11 @@ namespace SolarSystemWarfare
 
             Show();
 
-            StartGame();
+            earth = new Earth(200, 400, 2, 3, InitEarthPic());
+
+            ShowStartScreen();
+
+            //StartGame();
         }
 
         private void MoveShips()
@@ -61,7 +65,7 @@ namespace SolarSystemWarfare
             for (int counter = 0; counter != shipPool.Count; counter++)
             {
 
-                if (shipPool[counter].X <= -1 || shipPool[counter].X >= 525 ||
+                if (shipPool[counter].X <= -21 || shipPool[counter].X >= 565 ||
                         shipPool[counter].Y <= -20 || shipPool[counter].Y >= 650)
                 {
 
@@ -88,6 +92,15 @@ namespace SolarSystemWarfare
             RemoveShips.remove(shipPool);
 
             DisplayScore();
+
+            if (earth.Durability == 2)
+            {
+                Heart1.Fill = (ImageBrush)Resources["EmptyHeart"];
+            }
+            else if (earth.Durability == 1)
+            {
+                Heart2.Fill = (ImageBrush)Resources["EmptyHeart"];
+            }
 
             if (earth.Dead)
             {
@@ -317,7 +330,7 @@ namespace SolarSystemWarfare
 
         private void EnemyFire(Sprite origin, Direction d)
         {
-            Projectiles enemyLaser = new Projectiles(origin.X + 10, origin.Y, 6, 1, initProjPic(), d, 1);
+            Projectiles enemyLaser = new Projectiles(origin.X + 10, origin.Y, 6, 1, initProjPic(true), d, 1);
             Space.Children.Add(enemyLaser.Rect);
             shipPool.Add(enemyLaser);
         }
@@ -325,21 +338,27 @@ namespace SolarSystemWarfare
         /*Tori added method to spawn projectiles next to ship*/
         private void Fire(Sprite origin, Direction d)
         {
-            Projectiles Left = new Projectiles(origin.X, origin.Y, 6, 1, initProjPic(), d, 1);
+            Projectiles Left = new Projectiles(origin.X, origin.Y, 6, 1, initProjPic(false), d, 1);
             Space.Children.Add(Left.Rect);
             shipPool.Add(Left);
 
-            Projectiles Right = new Projectiles(origin.X + 45, origin.Y, 6, 1, initProjPic(), d, 1);
+            Projectiles Right = new Projectiles(origin.X + 45, origin.Y, 6, 1, initProjPic(false), d, 1);
             Space.Children.Add(Right.Rect);
             shipPool.Add(Right);
         }
 
         /*Tori added method to initilize projectile rectangle with projectile image*/
-        private Rectangle initProjPic()
+        private Rectangle initProjPic(bool enemy)
         {
             Rectangle projPic = new Rectangle();
-            projPic.Fill = (ImageBrush)Resources["ProjImage"];
-
+            if (enemy)
+            {
+                projPic.Fill = (ImageBrush)Resources["ProjImage"];
+            }
+            else
+            {
+                projPic.Fill = (ImageBrush)Resources["ProjEarthImage"];
+            }
             return projPic;
         }
 
@@ -395,6 +414,10 @@ namespace SolarSystemWarfare
             EnterHighScore.Visibility = Visibility.Visible;
             CommitHighScore.Visibility = Visibility.Visible;
             GameOverLabel.Visibility = Visibility.Visible;
+
+            Heart1.Visibility = Visibility.Hidden;
+            Heart2.Visibility = Visibility.Hidden;
+            Heart3.Visibility = Visibility.Hidden;
         }
 
         private void StartGame()
@@ -406,20 +429,6 @@ namespace SolarSystemWarfare
             Space.Children.Add(earth.Rect);
 
             spawnTimer = 1500;
-            Score.ResetScore();
-            ScoreLbl.Content = "Score: 0";
-
-            scores = Score.ReadFromFile();
-            StringBuilder namesAndScores = new StringBuilder();
-            for(int counter = 0; counter != scores.Count; counter++)
-            {
-
-                namesAndScores.Append(string.Format("{0}: {1}\n", scores.Keys.ElementAt(counter), 
-                                                                scores.Values.ElementAt(counter)));
-
-            }
-
-            Scores.Content = namesAndScores.ToString();
 
             timetoMove = new Timer(5);
             timetoMove.Elapsed += MoveEnemyShip;
@@ -446,24 +455,67 @@ namespace SolarSystemWarfare
             spawnEnemy.Enabled = true;
         }
 
+        private void ShowStartScreen()
+        {
+
+            double left = (Space.ActualWidth - GameTitle.ActualWidth) / 2;
+            Canvas.SetLeft(GameTitle, left);
+            Canvas.SetTop(GameTitle, 300);
+
+            GameTitle.Visibility = Visibility.Visible;
+
+            left = (Space.ActualWidth - StartGameBt.ActualWidth) / 2;
+            Canvas.SetLeft(StartGameBt, left);
+            Canvas.SetTop(StartGameBt, 400);
+
+            StartGameBt.Visibility = Visibility.Visible;
+
+            scores = Score.ReadFromFile();
+            StringBuilder namesAndScores = new StringBuilder();
+            for (int counter = 0; counter != scores.Count; counter++)
+            {
+
+                namesAndScores.Append(string.Format("{0}: {1}\n", scores.Keys.ElementAt(counter),
+                                                                scores.Values.ElementAt(counter)));
+
+            }
+
+            Scores.Content = namesAndScores.ToString();
+
+            ScoreLbl.Content = "Score: 0";
+        }
+
         private void CommitHighScore_Click(object sender, RoutedEventArgs e)
         {
             EnterHighScore.Visibility = Visibility.Hidden;
             CommitHighScore.Visibility = Visibility.Hidden;
 
-            double left = (Space.ActualWidth - PlayAgain.ActualWidth) / 2;
-            Canvas.SetLeft(PlayAgain, left);
-            Canvas.SetTop(PlayAgain, 400);
+            double left = (Space.ActualWidth - StartGameBt.ActualWidth) / 2;
+            Canvas.SetLeft(StartGameBt, left);
+            Canvas.SetTop(StartGameBt, 400);
 
-            Score.WriteToFile(EnterHighScore.Text);
+            Score.WriteToFile(EnterHighScore.Text, scores);
 
-            PlayAgain.Visibility = Visibility.Visible;
+            Score.ResetScore();
+
+            GameOverLabel.Visibility = Visibility.Hidden;
+
+            ShowStartScreen();
         }
 
-        private void PlayAgain_Click(object sender, RoutedEventArgs e)
+        private void StartGameBt_Click(object sender, RoutedEventArgs e)
         {
             GameOverLabel.Visibility = Visibility.Hidden;
-            PlayAgain.Visibility = Visibility.Hidden;
+            StartGameBt.Visibility = Visibility.Hidden;
+            GameTitle.Visibility = Visibility.Hidden;
+
+            Heart1.Fill = (ImageBrush)Resources["FullHeart"];
+            Heart2.Fill = (ImageBrush)Resources["FullHeart"];
+            Heart3.Fill = (ImageBrush)Resources["FullHeart"];
+
+            Heart1.Visibility = Visibility.Visible;
+            Heart2.Visibility = Visibility.Visible;
+            Heart3.Visibility = Visibility.Visible;
 
             StartGame();
         }

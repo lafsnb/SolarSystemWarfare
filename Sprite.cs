@@ -13,7 +13,7 @@ namespace SolarSystemWarfare
         public double X { get; private set; }
         public double Y { get; private set; }
         public double Speed { get; private set; }
-        protected int Durability { get; private set; }
+        public int Durability { get; private set; }
         public Rectangle Rect { get; protected set; }
         //private Icon Icon { get; } //TODO
 
