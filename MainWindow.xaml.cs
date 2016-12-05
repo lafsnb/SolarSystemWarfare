@@ -27,7 +27,13 @@ namespace SolarSystemWarfare
 
         private Earth earth;
         private bool lasersCooling = false;
+        double ScreenWidth = SystemParameters.VirtualScreenWidth;
+        double ScreenHeight = SystemParameters.VirtualScreenHeight;
         private int spawnTimer;
+        private int upDownSpawnLocation = ((int)SystemParameters.VirtualScreenWidth / 3) - 100;
+        private int swishSpawnLocation = ((int)SystemParameters.VirtualScreenWidth / 3) - 200;
+        private int patternHowFarDown = ((int)SystemParameters.VirtualScreenHeight) - (int)(SystemParameters.VirtualScreenHeight / 2.5);
+        private int swishHowFarX = ((int)SystemParameters.VirtualScreenWidth / 3) - 25;
         private Timer spawnEnemy;
         private Timer timetoMove;
         private Timer laserTimer;
@@ -43,6 +49,13 @@ namespace SolarSystemWarfare
         public MainWindow()
         {
             InitializeComponent();
+
+            Panel1.Width = ScreenWidth / 3;
+            Panel1.Height = ScreenHeight;
+            Panel2.Width = ScreenWidth / 3;
+            Panel2.Height = ScreenHeight;
+            Space.Width = ScreenWidth / 3;
+            Space.Height = ScreenHeight;
 
             Hide();
 
@@ -60,13 +73,22 @@ namespace SolarSystemWarfare
             //StartGame();
         }
 
+
+        // Position updating methods
+
+        /*
+         * 
+         * Main method to update ship positions, runs every 10 ms.
+         * Also removes ships from shipPool who are dead, and removes them from the Canvas.
+         * 
+         */
         private void MoveShips()
         {
             for (int counter = 0; counter != shipPool.Count; counter++)
             {
 
-                if (shipPool[counter].X <= -21 || shipPool[counter].X >= 565 ||
-                        shipPool[counter].Y <= -20 || shipPool[counter].Y >= 650)
+                if (shipPool[counter].X <= -21 || shipPool[counter].X >= Space.ActualWidth ||
+                        shipPool[counter].Y <= -20 || shipPool[counter].Y >= Space.ActualHeight - 80)
                 {
 
                     shipPool[counter].Destroy();
@@ -107,90 +129,13 @@ namespace SolarSystemWarfare
                 GameOver();
             }
         }
-
-        private void SpawnTimerIncrease(Object source, ElapsedEventArgs e)
-        {
-            if (spawnTimer != 400)
-            {
-                spawnTimer -= 10;
-                spawnEnemy.Interval = spawnTimer;
-            }
-        }
-
-        private void EnemiesFire(Object source, ElapsedEventArgs e)
-        {
-            firingList = new List<Sprite>();
-
-            foreach (Sprite el in shipPool)
-            {
-                if (el is Enemy)
-                {
-                    firingList.Add(el);
-                }
-            }
-
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(CheatEnemyLaserFire));
-        }
-
-        private void CoolLasersDown(Object source, ElapsedEventArgs e)
-        {
-            lasersCooling = false;
-        }
-
-        private void SpawnEnemies(Object source, ElapsedEventArgs e)
-        {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(NewEnemySpawn));
-        }
-
-
-        private void NewEnemySpawn()
-        {
-            int spawnChoice = rand.Next(1, 5);
-
-            Enemy en;
-
-            //Choice one is PatternSwish
-            if (spawnChoice == 1)
-            {
-                en = new Enemy(0, rand.Next(0, 301), 2, 1, 1, 2000, initEnemyPic());
-
-                en.Pattern = new PatternSwishRight(en, rand.Next(100, 301));
-
-            }
-            //Choice two is UpDownRight Pattern
-            else if (spawnChoice == 2)
-            {
-                en = new Enemy(rand.Next(50, 401), 0, 2, 1, 1, 2000, initEnemyPic());
-
-                en.Pattern = new PatternUpDownRight(en, rand.Next(20, 251));
-
-            }
-            //Choice three is UpDownLeft Pattern
-            else if (spawnChoice == 3)
-            {
-                en = new Enemy(rand.Next(50, 401), 0, 2, 1, 1, 2000, initEnemyPic());
-
-                en.Pattern = new PatternUpDownLeft(en, rand.Next(20, 251));
-
-            }
-            else
-            {
-                en = new Enemy(525, rand.Next(0, 301), 2, 1, 1, 2000, initEnemyPic());
-
-                en.Pattern = new PatternSwishLeft(en, rand.Next(100, 301));
-            }
-
-            shipPool.Add(en);
-            Space.Children.Add(shipPool.Last().Rect);
-
-            if (spawnTimer != 400)
-            {
-                spawnEnemy.Interval = spawnTimer -= 20;
-            }
-
-
-        }
-
+        /*
+        * 
+        * Method that changes positions for all Sprites in the shipPool.
+        * Catches if an exception occurs while we are looping, exception occurs from list being updated during the foreach loop.
+        * This exception only occurs evey few mins, and the impact is very minimal if at all.
+        * 
+        */
         private void PatternsMove()
         {
 
@@ -198,7 +143,7 @@ namespace SolarSystemWarfare
             {
                 earth.MoveY(-earth.Speed);
             }
-            if (earth.Down && earth.Y <= 640)
+            if (earth.Down && earth.Y <= Space.ActualHeight - 125)
             {
                 earth.MoveY(earth.Speed);
             }
@@ -206,7 +151,7 @@ namespace SolarSystemWarfare
             {
                 earth.MoveX(-earth.Speed);
             }
-            if (earth.Right && earth.X <= 515)
+            if (earth.Right && earth.X <= Space.ActualWidth - 125)
             {
                 earth.MoveX(earth.Speed);
             }
@@ -238,8 +183,13 @@ namespace SolarSystemWarfare
                 }
             }
             catch (InvalidOperationException) { }
-
         }
+
+        /*
+         * 
+         * Starts MoveShips on the UI thread.
+         * 
+         */
 
         private void MoveEnemyShip(Object source, ElapsedEventArgs e)
         {
@@ -248,6 +198,183 @@ namespace SolarSystemWarfare
             this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(MoveShips));
 
         }
+
+        // Sprite Spawning methods
+
+            // Laser Spawning methods
+
+        /*
+         * 
+         * Adds enemies to firingList from shipPool, then start CheatEnemyLaserFire on UI thread.
+         *
+         */
+
+        private void EnemiesFire(Object source, ElapsedEventArgs e)
+        {
+            firingList = new List<Sprite>();
+
+            foreach (Sprite el in shipPool)
+            {
+                if (el is Enemy)
+                {
+                    firingList.Add(el);
+                }
+            }
+
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(CheatEnemyLaserFire));
+        }
+
+        /*
+         * 
+         * Creates a projectile for an Enemy and adds it to the shipPool.
+         * 
+         */
+
+        private void EnemyFire(Sprite origin, Direction d)
+        {
+            Projectiles enemyLaser = new Projectiles(origin.X + 10, origin.Y, 6, 1, initProjPic(true), d, 1);
+            Space.Children.Add(enemyLaser.Rect);
+            shipPool.Add(enemyLaser);
+        }
+
+        /*
+         * 
+         * Creates two projectiles for Earth, and adds them to the shipPool.
+         * 
+         */
+
+        /*Tori added method to spawn projectiles next to ship*/
+        private void Fire(Sprite origin, Direction d)
+        {
+            Projectiles Left = new Projectiles(origin.X, origin.Y, 6, 1, initProjPic(false), d, 1);
+            Space.Children.Add(Left.Rect);
+            shipPool.Add(Left);
+
+            Projectiles Right = new Projectiles(origin.X + 45, origin.Y, 6, 1, initProjPic(false), d, 1);
+            Space.Children.Add(Right.Rect);
+            shipPool.Add(Right);
+        }
+
+        /*
+         * 
+         * Not a spawning method, but it does run every 500 ms to allow Earth to fire lasers again.
+         * 
+         */
+
+        private void CoolLasersDown(Object source, ElapsedEventArgs e)
+        {
+            lasersCooling = false;
+        }
+
+        /*
+         * 
+         * Runs Fire method on UI thread
+         * Couldn't figureout how to create a delegate with parameters,
+         * so I just made this to run Fire on UI thread through Dispatcher.
+         * 
+         */
+        private void CheatLaserFire()
+        {
+            Fire(earth, Direction.UP);
+        }
+
+        /*
+         * 
+         * Runs EnemyFire method on UI thread
+         * Couldn't figureout how to create a delegate with parameters,
+         * so I just made this to run EnemyFire on UI thread through Dispatcher.
+         * 
+         */
+
+        private void CheatEnemyLaserFire()
+        {
+            foreach (Sprite el in firingList)
+            {
+                EnemyFire(el, Direction.DOWN);
+            }
+        }
+
+        //Enemy Spawning Methods
+
+        /*
+         * 
+         * Starts NewEnemySpawn on the UI thread.
+         * 
+         */
+
+        private void SpawnEnemies(Object source, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new runOnUIThread(NewEnemySpawn));
+        }
+
+        /*
+         * 
+         * Spawns a new enemy in a random pattern, out of four patterns.
+         * Spawns the enemy in a random location for the specified pattern.
+         * 
+         */
+
+        private void NewEnemySpawn()
+        {
+            int spawnChoice = rand.Next(1, 5);
+
+            Enemy en;
+
+            //Choice one is PatternSwishRight
+            if (spawnChoice == 1)
+            {
+                en = new Enemy(0, rand.Next(0, swishSpawnLocation), 2, 1, 1, 2000, initEnemyPic());
+
+                en.Pattern = new PatternSwishRight(en, rand.Next(100, patternHowFarDown), swishHowFarX);
+
+            }
+            //Choice two is UpDownRight Pattern
+            else if (spawnChoice == 2)
+            {
+                en = new Enemy(rand.Next(50, upDownSpawnLocation), 0, 2, 1, 1, 2000, initEnemyPic());
+
+                en.Pattern = new PatternUpDownRight(en, rand.Next(20, patternHowFarDown));
+
+            }
+            //Choice three is UpDownLeft Pattern
+            else if (spawnChoice == 3)
+            {
+                en = new Enemy(rand.Next(50, upDownSpawnLocation), 0, 2, 1, 1, 2000, initEnemyPic());
+
+                en.Pattern = new PatternUpDownLeft(en, rand.Next(20, patternHowFarDown));
+
+            }
+            //Choice four is PatternSwishLeft
+            else
+            {
+                en = new Enemy(SystemParameters.VirtualScreenWidth / 3, rand.Next(0, swishSpawnLocation), 2, 1, 1, 2000, initEnemyPic());
+
+                en.Pattern = new PatternSwishLeft(en, rand.Next(100, patternHowFarDown), swishHowFarX);
+            }
+
+            // Add enemy to the shipPool and to the Canvas.
+
+            shipPool.Add(en);
+            Space.Children.Add(shipPool.Last().Rect);
+
+            // Increase difficulty by decreasing spawn time, up to 300 ms.
+
+            if (spawnTimer != 300)
+            {
+                spawnEnemy.Interval = spawnTimer -= 20;
+            }
+
+
+        }
+
+        // Listeners
+
+        /*
+         * 
+         * Listens for a keyDown, if a key that is supported is hit down
+         * then the ship will start moving in that direction, or start firing lasers.
+         * 
+         */
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -279,23 +406,12 @@ namespace SolarSystemWarfare
             }
         }
 
-        private Rectangle InitEarthPic()
-        {
-            Rectangle earthPic = new Rectangle();
-            earthPic.Fill = (ImageBrush)Resources["EarthImage"];
-            earthPic.Height = 40;
-            earthPic.Width = 50;
-
-            return earthPic;
-        }
-
-        private Rectangle initEnemyPic()
-        {
-            Rectangle enemyPic = new Rectangle();
-            enemyPic.Fill = (ImageBrush)Resources["EnemyImage"];
-
-            return enemyPic;
-        }
+        /*
+         * 
+         * Listens for a keyUp, if a key that is supported is unpressed
+         * then the ship will stop moving in that direction, or stop firing lasers.
+         * 
+         */
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
@@ -328,24 +444,92 @@ namespace SolarSystemWarfare
             }
         }
 
-        private void EnemyFire(Sprite origin, Direction d)
+        /*
+         * 
+         * When the game ends the user will have the chance to enter their name, and have it commited to disk.
+         * That happens through this method, that listens for the Enter Score button being pressed.
+         * 
+         */
+
+        private void CommitHighScore_Click(object sender, RoutedEventArgs e)
         {
-            Projectiles enemyLaser = new Projectiles(origin.X + 10, origin.Y, 6, 1, initProjPic(true), d, 1);
-            Space.Children.Add(enemyLaser.Rect);
-            shipPool.Add(enemyLaser);
+            EnterHighScore.Visibility = Visibility.Hidden;
+            CommitHighScore.Visibility = Visibility.Hidden;
+
+            double left = (Space.ActualWidth - StartGameBt.ActualWidth) / 2;
+            Canvas.SetLeft(StartGameBt, left);
+            Canvas.SetTop(StartGameBt, 400);
+
+            Score.WriteToFile(EnterHighScore.Text, scores);
+
+            Score.ResetScore();
+
+            GameOverLabel.Visibility = Visibility.Hidden;
+
+            ShowStartScreen();
         }
 
-        /*Tori added method to spawn projectiles next to ship*/
-        private void Fire(Sprite origin, Direction d)
-        {
-            Projectiles Left = new Projectiles(origin.X, origin.Y, 6, 1, initProjPic(false), d, 1);
-            Space.Children.Add(Left.Rect);
-            shipPool.Add(Left);
+        /*
+         * 
+         * Listener for the button that starts the game, the Start Game button.
+         * 
+         */
 
-            Projectiles Right = new Projectiles(origin.X + 45, origin.Y, 6, 1, initProjPic(false), d, 1);
-            Space.Children.Add(Right.Rect);
-            shipPool.Add(Right);
+        private void StartGameBt_Click(object sender, RoutedEventArgs e)
+        {
+            GameOverLabel.Visibility = Visibility.Hidden;
+            StartGameBt.Visibility = Visibility.Hidden;
+            GameTitle.Visibility = Visibility.Hidden;
+
+            Heart1.Fill = (ImageBrush)Resources["FullHeart"];
+            Heart2.Fill = (ImageBrush)Resources["FullHeart"];
+            Heart3.Fill = (ImageBrush)Resources["FullHeart"];
+
+            Heart1.Visibility = Visibility.Visible;
+            Heart2.Visibility = Visibility.Visible;
+            Heart3.Visibility = Visibility.Visible;
+
+            StartGame();
         }
+
+        // UI initializers
+
+        /*
+         * 
+         * Initializes earths picture.
+         * 
+         */
+
+        private Rectangle InitEarthPic()
+        {
+            Rectangle earthPic = new Rectangle();
+            earthPic.Fill = (ImageBrush)Resources["EarthImage"];
+            earthPic.Height = 40;
+            earthPic.Width = 50;
+
+            return earthPic;
+        }
+
+        /*
+         * 
+         * Initializes the picture for an enemy ship.
+         * 
+         */
+
+        private Rectangle initEnemyPic()
+        {
+            Rectangle enemyPic = new Rectangle();
+            enemyPic.Fill = (ImageBrush)Resources["EnemyImage"];
+
+            return enemyPic;
+        }
+
+        /*
+         * 
+         * Initializes a projectiles picture, initializes different pictures
+         * for Earth and Enemy.
+         *
+         */
 
         /*Tori added method to initilize projectile rectangle with projectile image*/
         private Rectangle initProjPic(bool enemy)
@@ -362,23 +546,22 @@ namespace SolarSystemWarfare
             return projPic;
         }
 
-        private void CheatLaserFire()
-        {
-            Fire(earth, Direction.UP);
-        }
-
-        private void CheatEnemyLaserFire()
-        {
-            foreach (Sprite el in firingList)
-            {
-                EnemyFire(el, Direction.DOWN);
-            }
-        }
-
+        /*
+         * 
+         * Updates the score counter
+         * 
+         */
         private void DisplayScore()
         {
             ScoreLbl.Content = $"Score: {Score.GetScore()}";
         }
+
+        /*
+         * 
+         * Stops all game timers, removes all Sprites from the Canvas, shipPool
+         * and puts up the GameOverLabel with the enter name box and Enter Score button
+         * 
+         */
 
         private void GameOver()
         {
@@ -420,6 +603,13 @@ namespace SolarSystemWarfare
             Heart3.Visibility = Visibility.Hidden;
         }
 
+        /*
+         * 
+         * Initializes all the timers to start the game,
+         * and initializes the earth.
+         * 
+         */
+
         private void StartGame()
         {
             earth = new Earth(200, 400, 2, 3, InitEarthPic());
@@ -455,6 +645,12 @@ namespace SolarSystemWarfare
             spawnEnemy.Enabled = true;
         }
 
+        /*
+         * 
+         * Initializes the welcome screen
+         * 
+         */
+
         private void ShowStartScreen()
         {
 
@@ -483,41 +679,6 @@ namespace SolarSystemWarfare
             Scores.Content = namesAndScores.ToString();
 
             ScoreLbl.Content = "Score: 0";
-        }
-
-        private void CommitHighScore_Click(object sender, RoutedEventArgs e)
-        {
-            EnterHighScore.Visibility = Visibility.Hidden;
-            CommitHighScore.Visibility = Visibility.Hidden;
-
-            double left = (Space.ActualWidth - StartGameBt.ActualWidth) / 2;
-            Canvas.SetLeft(StartGameBt, left);
-            Canvas.SetTop(StartGameBt, 400);
-
-            Score.WriteToFile(EnterHighScore.Text, scores);
-
-            Score.ResetScore();
-
-            GameOverLabel.Visibility = Visibility.Hidden;
-
-            ShowStartScreen();
-        }
-
-        private void StartGameBt_Click(object sender, RoutedEventArgs e)
-        {
-            GameOverLabel.Visibility = Visibility.Hidden;
-            StartGameBt.Visibility = Visibility.Hidden;
-            GameTitle.Visibility = Visibility.Hidden;
-
-            Heart1.Fill = (ImageBrush)Resources["FullHeart"];
-            Heart2.Fill = (ImageBrush)Resources["FullHeart"];
-            Heart3.Fill = (ImageBrush)Resources["FullHeart"];
-
-            Heart1.Visibility = Visibility.Visible;
-            Heart2.Visibility = Visibility.Visible;
-            Heart3.Visibility = Visibility.Visible;
-
-            StartGame();
         }
     }
 
