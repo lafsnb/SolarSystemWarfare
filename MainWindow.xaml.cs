@@ -151,7 +151,7 @@ namespace SolarSystemWarfare
             {
                 earth.MoveX(-earth.Speed);
             }
-            if (earth.Right && earth.X <= Space.ActualWidth - 125)
+            if (earth.Right && earth.X <= Space.ActualWidth - 55)
             {
                 earth.MoveX(earth.Speed);
             }
@@ -668,10 +668,10 @@ namespace SolarSystemWarfare
 
             scores = Score.ReadFromFile();
             StringBuilder namesAndScores = new StringBuilder();
-            for (int counter = 0; counter != scores.Count; counter++)
+            for (int counter = 0; counter != scores.Count && counter != 15; counter++)
             {
 
-                namesAndScores.Append(string.Format("{0}: {1}\n", scores.Keys.ElementAt(counter),
+                namesAndScores.Append(string.Format("{0}. {1}: {2}\n", counter + 1, scores.Keys.ElementAt(counter),
                                                                 scores.Values.ElementAt(counter)));
 
             }
