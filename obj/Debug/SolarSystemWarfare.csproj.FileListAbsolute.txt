@@ -55,3 +55,45 @@ C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWa
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\Splash.g.cs
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-master (2)\SolarSystemWarfare-master\obj\Debug\Splash.baml
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\MainWindow.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\Splash.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\App.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.exe.manifest
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.application
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.exe
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.pdb
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\App.baml
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\MainWindow.baml
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\Splash.baml
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.g.resources
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.TrustInfo.xml
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.exe.manifest
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.application
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.exe
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.pdb
+C:\Users\stelf\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.csprojResolveAssemblyReference.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.exe
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.pdb
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.exe.manifest
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.application
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.exe
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\bin\Debug\SolarSystemWarfare.pdb
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.csprojResolveAssemblyReference.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\MainWindow.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\Splash.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\App.g.cs
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\App.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\MainWindow.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\Splash.baml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.g.resources
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.Properties.Resources.resources
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.csproj.GenerateResource.Cache
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.TrustInfo.xml
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.exe.manifest
+C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.application

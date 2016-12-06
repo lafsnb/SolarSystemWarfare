@@ -1,8 +1,1 @@
-Player,3
-PlayerThree,4
-PlayerTwo,5
-Jackson,3
-Jackson2,9
-Mr.Man,51
-Jacky,16
-Steven,14
+Player1,4

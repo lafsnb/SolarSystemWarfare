@@ -9,9 +9,13 @@ namespace SolarSystemWarfare
 {
     class PatternSwishRight : Patterns
     {
+        private int howFarX;
 
-        public PatternSwishRight(Sprite sprite, int howFarDown) 
-            : base (sprite, howFarDown) { }
+        public PatternSwishRight(Sprite sprite, int howFarDown, int howFarX) 
+            : base (sprite, howFarDown)
+        {
+            this.howFarX = howFarX;
+        }
 
 
         public override void runPattern()
@@ -39,7 +43,7 @@ namespace SolarSystemWarfare
                 Sprite.MoveY(Sprite.Speed / 4);
                 Sprite.MoveX(-Sprite.Speed);
             }
-            if (Sprite.X == 400 && !(Sprite.Y >= howFarDown))
+            if (Sprite.X == howFarX && !(Sprite.Y >= howFarDown))
             {
                 pathOne = false;
                 pathTwo = true;
