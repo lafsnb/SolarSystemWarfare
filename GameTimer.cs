@@ -9,10 +9,26 @@ namespace SolarSystemWarfare
     class GameTimer : Timer
     {
 
+        private int time;
+
+        public GameTimer(double interval) : base(interval){}
+
         public void Pause()
         {
-            this.
+            this.Stop();
+            setStartTime();
         }
 
+        public void setStartTime()
+        {
+            time = DateTime.Now.Millisecond;
+        }
+
+        public void Resume()
+        {
+            int timePassed = time - DateTime.Now.Millisecond;
+            Interval = Interval - timePassed;
+            this.Start();
+        }
     }
 }

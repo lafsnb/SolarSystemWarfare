@@ -33,15 +33,19 @@ namespace SolarSystemWarfare
         private bool gamePaused = false;
         double screenWidth = SystemParameters.VirtualScreenWidth;
         double screenHeight = SystemParameters.VirtualScreenHeight;
-        private int spawnTimer;
         private int upDownSpawnLocation = ((int)SystemParameters.VirtualScreenWidth / 3) - 100;
         private int swishSpawnLocation = ((int)SystemParameters.VirtualScreenWidth / 3) - 200;
         private int patternHowFarDown = ((int)SystemParameters.VirtualScreenHeight) - (int)(SystemParameters.VirtualScreenHeight / 2.5);
         private int swishHowFarX = ((int)SystemParameters.VirtualScreenWidth / 3) - 25;
-        private Timer spawnEnemy;
-        private Timer timetoMove;
-        private Timer laserTimer;
-        private Timer enemyFire;
+        private GameTimer spawnEnemy;
+        private int spawnEnemySpeed;
+        private GameTimer timetoMove;
+        private int timetoMoveSpeed = 5;
+        private GameTimer laserTimer;
+        private int laserTimerSpeed = 500;
+        private GameTimer enemyFire;
+        private int enemyFireSpeed = 2000;
+
 
         private IList<Sprite> shipPool = new List<Sprite>();
         IDictionary<string, long> scores;
@@ -273,6 +277,7 @@ namespace SolarSystemWarfare
         private void CoolLasersDown(Object source, ElapsedEventArgs e)
         {
             lasersCooling = false;
+            laserTimer.Interval = laserTimerSpeed;
         }
 
         /*
@@ -368,9 +373,9 @@ namespace SolarSystemWarfare
 
             // Increase difficulty by decreasing spawn time, up to 300 ms.
 
-            if (spawnTimer != 300)
+            if (spawnEnemySpeed != 300)
             {
-                spawnEnemy.Interval = spawnTimer -= 20;
+                spawnEnemy.Interval = spawnEnemySpeed -= 20;
             }
 
 
@@ -653,27 +658,27 @@ namespace SolarSystemWarfare
 
             Space.Children.Add(earth.Rect);
 
-            spawnTimer = 1500;
+            spawnEnemySpeed = 1500;
 
-            timetoMove = new Timer(5);
+            timetoMove = new GameTimer(timetoMoveSpeed);
             timetoMove.Elapsed += MoveEnemyShip;
 
             timetoMove.AutoReset = true;
             timetoMove.Enabled = true;
 
-            laserTimer = new Timer(500);
+            laserTimer = new GameTimer(laserTimerSpeed);
             laserTimer.Elapsed += CoolLasersDown;
 
             laserTimer.AutoReset = true;
             laserTimer.Enabled = true;
 
-            enemyFire = new Timer(2000);
+            enemyFire = new GameTimer(enemyFireSpeed);
             enemyFire.Elapsed += EnemiesFire;
 
             enemyFire.AutoReset = true;
             enemyFire.Enabled = true;
 
-            spawnEnemy = new Timer(spawnTimer);
+            spawnEnemy = new GameTimer(spawnEnemySpeed);
             spawnEnemy.Elapsed += SpawnEnemies;
 
             spawnEnemy.AutoReset = true;
@@ -734,10 +739,10 @@ namespace SolarSystemWarfare
 
             MenuPopup.IsOpen = true;
 
-            //spawnEnemy.Stop();
-            //timetoMove.Stop();
-            //laserTimer.Stop();
-            //enemyFire.Stop();
+            spawnEnemy.Pause();
+            timetoMove.Pause();
+            laserTimer.Pause();
+            enemyFire.Pause();
         }
 
         private void Resume_Click(object sender, RoutedEventArgs e)
