@@ -25,8 +25,12 @@ namespace SolarSystemWarfare
 
         public string highScores;
 
+        private System.Threading.EventWaitHandle pause = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.ManualReset);
+
         private Earth earth;
         private bool lasersCooling = false;
+        private bool gameStarted = false;
+        private bool gamePaused = false;
         double screenWidth = SystemParameters.VirtualScreenWidth;
         double screenHeight = SystemParameters.VirtualScreenHeight;
         private int spawnTimer;
@@ -206,7 +210,7 @@ namespace SolarSystemWarfare
 
         // Sprite Spawning methods
 
-            // Laser Spawning methods
+        // Laser Spawning methods
 
         /*
          * 
@@ -408,6 +412,21 @@ namespace SolarSystemWarfare
                 case Key.Space:
                     earth.Firing = true;
                     break;
+
+                case Key.Escape:
+                case Key.F10:
+                    if (gameStarted)
+                    {
+                        if (gamePaused)
+                        {
+                            ResumeGame();
+                        } else
+                        {
+                            PauseGame();
+                        }
+                        
+                    }
+                    break;
             }
         }
 
@@ -468,7 +487,8 @@ namespace SolarSystemWarfare
             if (string.IsNullOrWhiteSpace(EnterHighScore.Text))
             {
                 Score.WriteToFile("Player1", scores);
-            } else
+            }
+            else
             {
                 Score.WriteToFile(EnterHighScore.Text, scores);
             }
@@ -576,6 +596,8 @@ namespace SolarSystemWarfare
 
         private void GameOver()
         {
+            gameStarted = false;
+
             spawnEnemy.Stop();
             timetoMove.Stop();
             laserTimer.Stop();
@@ -623,6 +645,8 @@ namespace SolarSystemWarfare
 
         private void StartGame()
         {
+            gameStarted = true;
+
             earth = new Earth(200, 400, 2, 3, InitEarthPic());
 
             shipPool.Add(earth);
@@ -690,6 +714,40 @@ namespace SolarSystemWarfare
             Scores.Content = namesAndScores.ToString();
 
             ScoreLbl.Content = "Score: 0";
+        }
+
+        private void ResumeGame()
+        {
+            gamePaused = false;
+
+            MenuPopup.IsOpen = false;
+
+            spawnEnemy.Start();
+            timetoMove.Start();
+            laserTimer.Start();
+            enemyFire.Start();
+        }
+
+        private void PauseGame()
+        {
+            gamePaused = true;
+
+            MenuPopup.IsOpen = true;
+
+            //spawnEnemy.Stop();
+            //timetoMove.Stop();
+            //laserTimer.Stop();
+            //enemyFire.Stop();
+        }
+
+        private void Resume_Click(object sender, RoutedEventArgs e)
+        {
+            ResumeGame();
+        }
+
+        private void ExitGame_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

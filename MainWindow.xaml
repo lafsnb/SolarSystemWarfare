@@ -18,6 +18,13 @@
         <ImageBrush x:Key= "EmptyHeart" ImageSource="Images/emptyHeart.png"/>
     </Window.Resources>
     <DockPanel>
+        <Popup Name="MenuPopup" Width="400" Height="400" Placement="Center" AllowsTransparency="True">
+            <StackPanel Background="#E5000000">
+                <Label Name="PausedLb" Content="Game Paused" Foreground="White" FontSize="40" HorizontalAlignment="Center"></Label>
+                <Button Name="Resume" Content="Resume" FontSize="20" Click="Resume_Click" HorizontalAlignment="Center"></Button>
+                <Button Name="ExitGame" Content="Exit Game" FontSize="20" Click="ExitGame_Click"  HorizontalAlignment="Center"></Button>
+            </StackPanel>
+        </Popup>
         <StackPanel Name="Panel1" DockPanel.Dock="Left" Width="400" Background="Black" Panel.ZIndex="100">
             <Label Name="HighScores" HorizontalAlignment="Center" Padding="10px" Content="High Scores" FontSize="30" Foreground="Yellow"/>
             <Label Name="Scores" HorizontalAlignment="Center" Padding="10px" Content="High Scores" FontSize="25" Foreground="Yellow"/>
