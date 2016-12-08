@@ -97,18 +97,17 @@ C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarS
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.TrustInfo.xml
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.exe.manifest
 C:\Users\Jackson Warburton\Downloads\SolarSystemWarfare-JacksonsAdditions\SolarSystemWarfare-JacksonsAdditions\obj\Debug\SolarSystemWarfare.application
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.exe
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.pdb
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.csprojResolveAssemblyReference.cache
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\MainWindow.g.cs
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\Splash.g.cs
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\App.g.cs
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
-C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\bin\Debug\The Lift.mp3
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.exe.manifest
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.application
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.exe
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\bin\Debug\SolarSystemWarfare.pdb
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\MainWindow.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\Splash.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\App.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_Content.g.cs
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.cache
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare_MarkupCompile.lref
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\App.baml
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\MainWindow.baml
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\Splash.baml
@@ -118,3 +117,5 @@ C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.TrustInfo.xml
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.exe.manifest
 C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.application
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.exe
+C:\Users\stelf\Downloads\SolarSystemWarfare-master (3)\SolarSystemWarfare-master\obj\Debug\SolarSystemWarfare.pdb

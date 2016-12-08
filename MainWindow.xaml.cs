@@ -25,6 +25,8 @@ namespace SolarSystemWarfare
 
         public string highScores;
 
+        MediaPlayer backgroundMusic;
+
         private Earth earth;
         private bool lasersCooling = false;
         double screenWidth = SystemParameters.VirtualScreenWidth;
@@ -69,6 +71,8 @@ namespace SolarSystemWarfare
             System.Threading.Thread.Sleep(5000);
             splash.Close();
 
+            StartMusic();
+
             Show();
 
             earth = new Earth(200, 400, 2, 3, InitEarthPic());
@@ -97,7 +101,6 @@ namespace SolarSystemWarfare
                 {
 
                     shipPool[counter].Destroy();
-                    Console.WriteLine("Ship removed");
                 }
                 else
                 {
@@ -468,11 +471,10 @@ namespace SolarSystemWarfare
 
             if (string.IsNullOrWhiteSpace(EnterHighScore.Text))
             {
-                scores.Add(new PlayerScore("Player", Score.GetScore()));
+                scores.Add(new PlayerScore("Player", Score.GetScore(), DateTime.Now));
             } else
             {
-                scores.Add(new PlayerScore(EnterHighScore.Text, Score.GetScore()));
-                //Score.WriteToFile(EnterHighScore.Text, scores);
+                scores.Add(new PlayerScore(EnterHighScore.Text, Score.GetScore(), DateTime.Now));
             }
 
             scores.Sort();
@@ -501,6 +503,7 @@ namespace SolarSystemWarfare
             GameOverLabel.Visibility = Visibility.Hidden;
             StartGameBt.Visibility = Visibility.Hidden;
             GameTitle.Visibility = Visibility.Hidden;
+            MusicCreditsBt.Visibility = Visibility.Hidden;
 
             Heart1.Fill = (ImageBrush)Resources["FullHeart"];
             Heart2.Fill = (ImageBrush)Resources["FullHeart"];
@@ -664,6 +667,7 @@ namespace SolarSystemWarfare
 
             spawnEnemy.AutoReset = true;
             spawnEnemy.Enabled = true;
+
         }
 
         /*
@@ -682,10 +686,16 @@ namespace SolarSystemWarfare
             GameTitle.Visibility = Visibility.Visible;
 
             left = (Space.ActualWidth - StartGameBt.ActualWidth) / 2;
-            Canvas.SetLeft(StartGameBt, left);
+            Canvas.SetLeft(StartGameBt, left - 50);
             Canvas.SetTop(StartGameBt, 400);
 
             StartGameBt.Visibility = Visibility.Visible;
+
+            left = (Space.ActualWidth - MusicCreditsBt.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCreditsBt, left + 50);
+            Canvas.SetTop(MusicCreditsBt, 400);
+
+            MusicCreditsBt.Visibility = Visibility.Visible;
 
             scores = Score.RestoreScores();
             StringBuilder namesAndScores = new StringBuilder();
@@ -700,6 +710,70 @@ namespace SolarSystemWarfare
             Scores.Content = namesAndScores.ToString();
 
             ScoreLbl.Content = "Score: 0";
+        }
+
+        private void StartMusic()
+        {
+            backgroundMusic = new MediaPlayer();
+            Uri uri = new Uri("The Lift.mp3", UriKind.Relative);
+            backgroundMusic.Open(uri);
+            backgroundMusic.MediaEnded += new EventHandler(Media_Ended);
+            backgroundMusic.Play();
+        }
+
+        private void MusicCreditsBt_Click(object sender, RoutedEventArgs e)
+        {
+            GameTitle.Visibility = Visibility.Hidden;
+            StartGameBt.Visibility = Visibility.Hidden;
+            MusicCreditsBt.Visibility = Visibility.Hidden;
+
+            double left = (Space.ActualWidth - MusicCreditsTitle.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCreditsTitle, left);
+            Canvas.SetTop(MusicCreditsTitle, 200);
+
+            MusicCreditsTitle.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCredits1.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCredits1, left);
+            Canvas.SetTop(MusicCredits1, 300);
+
+            MusicCredits1.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCredits2.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCredits2, left);
+            Canvas.SetTop(MusicCredits2, 350);
+
+            MusicCredits2.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCredits3.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCredits3, left);
+            Canvas.SetTop(MusicCredits3, 400);
+
+            MusicCredits3.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCreditsBackBt.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCreditsBackBt, left);
+            Canvas.SetTop(MusicCreditsBackBt, 450);
+
+            MusicCreditsBackBt.Visibility = Visibility.Visible;
+        }
+
+        private void MusicCreditsBackBt_Click(object sender, RoutedEventArgs e)
+        {
+
+            MusicCreditsTitle.Visibility = Visibility.Hidden;
+            MusicCredits1.Visibility = Visibility.Hidden;
+            MusicCredits2.Visibility = Visibility.Hidden;
+            MusicCredits3.Visibility = Visibility.Hidden;
+            MusicCreditsBackBt.Visibility = Visibility.Hidden;
+
+            ShowStartScreen();
+        }
+
+        private void Media_Ended (object sender, EventArgs e)
+        {
+            backgroundMusic.Position = TimeSpan.Zero;
+            backgroundMusic.Play();
         }
     }
 }

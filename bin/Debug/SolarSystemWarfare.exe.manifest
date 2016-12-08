@@ -42,17 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SolarSystemWarfare.exe" size="229888">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SolarSystemWarfare.exe" size="232448">
       <assemblyIdentity name="SolarSystemWarfare" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>NV0GGKyhRzVjI7CBbw/Sknljvhg=</dsig:DigestValue>
+        <dsig:DigestValue>XgmkMv2iSX8W4dyKE7GYsPDW0D4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="The Lift.mp3" size="14960193">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>lhgGCP8xMyLQV8HeziIVdOr6ksU=</dsig:DigestValue>
+    </hash>
+  </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
     <application>
       <!-- A list of the Windows versions that this application has been tested on and is
