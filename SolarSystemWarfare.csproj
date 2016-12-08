@@ -94,6 +94,7 @@
     <Compile Include="PatternSwishLeft.cs" />
     <Compile Include="PatternUpDownLeft.cs" />
     <Compile Include="PatternUpDownRight.cs" />
+    <Compile Include="PlayerScore.cs" />
     <Compile Include="Projectiles.cs" />
     <Compile Include="RemoveShips.cs" />
     <Compile Include="Score.cs" />

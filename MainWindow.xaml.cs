@@ -40,7 +40,7 @@ namespace SolarSystemWarfare
         private Timer enemyFire;
 
         private IList<Sprite> shipPool = new List<Sprite>();
-        IDictionary<string, long> scores;
+        List<PlayerScore> scores;
         IList<Sprite> firingList;
 
 
@@ -465,14 +465,24 @@ namespace SolarSystemWarfare
             Canvas.SetLeft(StartGameBt, left);
             Canvas.SetTop(StartGameBt, 400);
 
+
             if (string.IsNullOrWhiteSpace(EnterHighScore.Text))
             {
-                Score.WriteToFile("Player1", scores);
+                scores.Add(new PlayerScore("Player", Score.GetScore()));
             } else
             {
-                Score.WriteToFile(EnterHighScore.Text, scores);
+                scores.Add(new PlayerScore(EnterHighScore.Text, Score.GetScore()));
+                //Score.WriteToFile(EnterHighScore.Text, scores);
             }
 
+            scores.Sort();
+
+            if (scores.Count > 15)
+            {
+                scores.Remove(scores.Last());
+            }
+
+            Score.WriteToFile(scores);
             Score.ResetScore();
 
             GameOverLabel.Visibility = Visibility.Hidden;
@@ -677,13 +687,13 @@ namespace SolarSystemWarfare
 
             StartGameBt.Visibility = Visibility.Visible;
 
-            scores = Score.ReadFromFile();
+            scores = Score.RestoreScores();
             StringBuilder namesAndScores = new StringBuilder();
             for (int counter = 0; counter != scores.Count && counter != 15; counter++)
             {
 
-                namesAndScores.Append(string.Format("{0}. {1}: {2}\n", counter + 1, scores.Keys.ElementAt(counter),
-                                                                scores.Values.ElementAt(counter).ToString()));
+                namesAndScores.Append(string.Format("{0}. {1}: {2}\n", counter + 1, scores[counter].Name,
+                                                                scores[counter].Score));
 
             }
 

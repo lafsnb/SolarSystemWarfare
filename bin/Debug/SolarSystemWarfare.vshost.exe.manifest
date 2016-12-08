@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SolarSystemWarfare.exe" size="239616">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SolarSystemWarfare.exe" size="229888">
       <assemblyIdentity name="SolarSystemWarfare" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/hNGRY6Nj8xWH0ur4RJ4cSu77pg=</dsig:DigestValue>
+        <dsig:DigestValue>NV0GGKyhRzVjI7CBbw/Sknljvhg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
