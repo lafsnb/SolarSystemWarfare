@@ -113,7 +113,11 @@ namespace SolarSystemWarfare
                 sprite1.Y + height >= sprite2.Y &&
                 sprite1.Y + height <= sprite2.Y + sprite2.Rect.Height)
             {
-                Score.IncrementScore();
+                if ((sprite1 is Enemy && sprite2 is Projectiles) ||
+                    (sprite1 is Projectiles && sprite2 is Enemy))
+                {
+                    Score.IncrementScore();
+                }
                 return true;
             }
 

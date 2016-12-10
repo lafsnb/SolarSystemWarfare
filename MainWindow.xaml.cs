@@ -25,6 +25,8 @@ namespace SolarSystemWarfare
 
         public string highScores;
 
+        MediaPlayer backgroundMusic;
+
         private Earth earth;
         private bool lasersCooling = false;
         double screenWidth = SystemParameters.VirtualScreenWidth;
@@ -40,7 +42,7 @@ namespace SolarSystemWarfare
         private Timer enemyFire;
 
         private IList<Sprite> shipPool = new List<Sprite>();
-        IDictionary<string, long> scores;
+        List<PlayerScore> scores;
         IList<Sprite> firingList;
 
 
@@ -68,6 +70,8 @@ namespace SolarSystemWarfare
             splash.Show();
             System.Threading.Thread.Sleep(5000);
             splash.Close();
+
+            StartMusic();
 
             Show();
 
@@ -97,7 +101,6 @@ namespace SolarSystemWarfare
                 {
 
                     shipPool[counter].Destroy();
-                    Console.WriteLine("Ship removed");
                 }
                 else
                 {
@@ -465,14 +468,23 @@ namespace SolarSystemWarfare
             Canvas.SetLeft(StartGameBt, left);
             Canvas.SetTop(StartGameBt, 400);
 
+
             if (string.IsNullOrWhiteSpace(EnterHighScore.Text))
             {
-                Score.WriteToFile("Player1", scores);
+                scores.Add(new PlayerScore("Player", Score.GetScore(), DateTime.Now));
             } else
             {
-                Score.WriteToFile(EnterHighScore.Text, scores);
+                scores.Add(new PlayerScore(EnterHighScore.Text, Score.GetScore(), DateTime.Now));
             }
 
+            scores.Sort();
+
+            if (scores.Count > 15)
+            {
+                scores.Remove(scores.Last());
+            }
+
+            Score.WriteToFile(scores);
             Score.ResetScore();
 
             GameOverLabel.Visibility = Visibility.Hidden;
@@ -491,6 +503,7 @@ namespace SolarSystemWarfare
             GameOverLabel.Visibility = Visibility.Hidden;
             StartGameBt.Visibility = Visibility.Hidden;
             GameTitle.Visibility = Visibility.Hidden;
+            MusicCreditsBt.Visibility = Visibility.Hidden;
 
             Heart1.Fill = (ImageBrush)Resources["FullHeart"];
             Heart2.Fill = (ImageBrush)Resources["FullHeart"];
@@ -654,6 +667,7 @@ namespace SolarSystemWarfare
 
             spawnEnemy.AutoReset = true;
             spawnEnemy.Enabled = true;
+
         }
 
         /*
@@ -672,24 +686,94 @@ namespace SolarSystemWarfare
             GameTitle.Visibility = Visibility.Visible;
 
             left = (Space.ActualWidth - StartGameBt.ActualWidth) / 2;
-            Canvas.SetLeft(StartGameBt, left);
+            Canvas.SetLeft(StartGameBt, left - 50);
             Canvas.SetTop(StartGameBt, 400);
 
             StartGameBt.Visibility = Visibility.Visible;
 
-            scores = Score.ReadFromFile();
+            left = (Space.ActualWidth - MusicCreditsBt.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCreditsBt, left + 50);
+            Canvas.SetTop(MusicCreditsBt, 400);
+
+            MusicCreditsBt.Visibility = Visibility.Visible;
+
+            scores = Score.RestoreScores();
             StringBuilder namesAndScores = new StringBuilder();
             for (int counter = 0; counter != scores.Count && counter != 15; counter++)
             {
 
-                namesAndScores.Append(string.Format("{0}. {1}: {2}\n", counter + 1, scores.Keys.ElementAt(counter),
-                                                                scores.Values.ElementAt(counter).ToString()));
+                namesAndScores.Append(string.Format("{0}. {1}: {2}\n", counter + 1, scores[counter].Name,
+                                                                scores[counter].Score));
 
             }
 
             Scores.Content = namesAndScores.ToString();
 
             ScoreLbl.Content = "Score: 0";
+        }
+
+        private void StartMusic()
+        {
+            backgroundMusic = new MediaPlayer();
+            Uri uri = new Uri("The Lift.mp3", UriKind.Relative);
+            backgroundMusic.Open(uri);
+            backgroundMusic.MediaEnded += new EventHandler(Media_Ended);
+            backgroundMusic.Play();
+        }
+
+        private void MusicCreditsBt_Click(object sender, RoutedEventArgs e)
+        {
+            GameTitle.Visibility = Visibility.Hidden;
+            StartGameBt.Visibility = Visibility.Hidden;
+            MusicCreditsBt.Visibility = Visibility.Hidden;
+
+            double left = (Space.ActualWidth - MusicCreditsTitle.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCreditsTitle, left);
+            Canvas.SetTop(MusicCreditsTitle, 200);
+
+            MusicCreditsTitle.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCredits1.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCredits1, left);
+            Canvas.SetTop(MusicCredits1, 300);
+
+            MusicCredits1.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCredits2.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCredits2, left);
+            Canvas.SetTop(MusicCredits2, 350);
+
+            MusicCredits2.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCredits3.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCredits3, left);
+            Canvas.SetTop(MusicCredits3, 400);
+
+            MusicCredits3.Visibility = Visibility.Visible;
+
+            left = left = (Space.ActualWidth - MusicCreditsBackBt.ActualWidth) / 2;
+            Canvas.SetLeft(MusicCreditsBackBt, left);
+            Canvas.SetTop(MusicCreditsBackBt, 450);
+
+            MusicCreditsBackBt.Visibility = Visibility.Visible;
+        }
+
+        private void MusicCreditsBackBt_Click(object sender, RoutedEventArgs e)
+        {
+
+            MusicCreditsTitle.Visibility = Visibility.Hidden;
+            MusicCredits1.Visibility = Visibility.Hidden;
+            MusicCredits2.Visibility = Visibility.Hidden;
+            MusicCredits3.Visibility = Visibility.Hidden;
+            MusicCreditsBackBt.Visibility = Visibility.Hidden;
+
+            ShowStartScreen();
+        }
+
+        private void Media_Ended (object sender, EventArgs e)
+        {
+            backgroundMusic.Position = TimeSpan.Zero;
+            backgroundMusic.Play();
         }
     }
 }

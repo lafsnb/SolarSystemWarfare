@@ -38,9 +38,15 @@
             <Canvas Name="Space">
                 <Label Name="GameTitle" Foreground="White" Content="Solar System Warfare" FontSize="40" Visibility="Hidden" />
                 <Label Name="GameOverLabel" Content="Game Over" Foreground="White" FontSize="50" Visibility="Hidden"/>
-                <TextBox Name="EnterHighScore" Text="Player1" MaxLength="25" Width="100" Background="White" Foreground="Black" Visibility="Hidden" ToolTip="Enter Name"/>
-                <Button Name="CommitHighScore" Content="Enter Score" Background="White" Foreground="Black" Visibility="Hidden" Click="CommitHighScore_Click"/>
-                <Button Name="StartGameBt" Content="Start Game" Background="White" Foreground="Black" Visibility="Hidden" Click="StartGameBt_Click"/>
+                <Label Name="MusicCreditsTitle" Foreground="White" Content="Music Credits" FontSize="50" Visibility="Hidden"/>
+                <Label Name="MusicCredits1" Foreground="White" Content='"The Lift" Kevin MacLeod (incompetech.com)' Visibility="Hidden"/>
+                <Label Name="MusicCredits2" Foreground="White" Content="Licensed under Creative Commons: By Attribution 3.0 License" Visibility="Hidden"/>
+                <Label Name="MusicCredits3" Foreground="White" Content="http://creativecommons.org/licenses/by/3.0/" Visibility="Hidden"/>
+                <TextBox Name="EnterHighScore" Text="Player1" MaxLength="25" Width="100" Visibility="Hidden" ToolTip="Enter Name"/>
+                <Button Name="CommitHighScore" Content="Enter Score" Visibility="Hidden" Click="CommitHighScore_Click"/>
+                <Button Name="StartGameBt" Content="Start Game" Visibility="Hidden" Click="StartGameBt_Click"/>
+                <Button Name="MusicCreditsBt" Content="Music Credits" Visibility="Hidden" Click="MusicCreditsBt_Click"/>
+                <Button Name="MusicCreditsBackBt" Content="Back" FontSize="15" Visibility="Hidden" Click="MusicCreditsBackBt_Click"/>
             </Canvas>
         </StackPanel>
     </DockPanel>

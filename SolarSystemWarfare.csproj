@@ -94,6 +94,7 @@
     <Compile Include="PatternSwishLeft.cs" />
     <Compile Include="PatternUpDownLeft.cs" />
     <Compile Include="PatternUpDownRight.cs" />
+    <Compile Include="PlayerScore.cs" />
     <Compile Include="Projectiles.cs" />
     <Compile Include="RemoveShips.cs" />
     <Compile Include="Score.cs" />
@@ -176,6 +177,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ProjectileEarth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="The Lift.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
